@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tasks — ColsTorso (Store) · Example data</title>
+<link rel="stylesheet" href="../tokens.css"><link rel="stylesheet" href="ct-components.css">
+<style>
+  .tg { display: grid; grid-template-columns: minmax(0,1fr); gap: var(--ct-space-200); }
+  @container app (min-width: 1024px) { .tg { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--ct-space-300); align-items: start; } }
+  .grp { font: var(--ct-type-label); color: var(--ct-color-text-secondary); display: flex; justify-content: space-between; margin: var(--ct-space-100) 0; }
+  .task { display: grid; grid-template-columns: auto minmax(0,1fr) auto; gap: var(--ct-space-100); align-items: start; padding: var(--ct-space-150) var(--ct-space-150) var(--ct-space-150) var(--ct-space-050); border-top: 1px solid var(--ct-color-border-subtle); }
+  .task:first-child { border-top: 0; }
+  .task .t { font: var(--ct-type-label); font-size: var(--ct-font-size-100); padding-top: 10px; }
+  .task.done .t { text-decoration: line-through; color: var(--ct-color-text-secondary); }
+  .task .m { display: flex; flex-wrap: wrap; gap: var(--ct-space-050) var(--ct-space-150); margin-top: var(--ct-space-050); font: var(--ct-type-body-sm); color: var(--ct-color-text-secondary); }
+  .task .m span { display: inline-flex; align-items: center; gap: 4px; }
+  .task.sel { background: var(--ct-color-surface-selected); }
+  .sync { display: inline-flex; align-items: center; gap: 4px; font: var(--ct-type-caption); color: var(--ct-color-text-secondary); padding: 2px 8px; border-radius: var(--ct-radius-pill); border: 1px dashed var(--ct-color-border-strong); }
+  .detail { display: grid; gap: var(--ct-space-200); }
+  .q { display: grid; gap: var(--ct-space-100); }
+  .q .lbl { font: var(--ct-type-label); font-size: var(--ct-font-size-100); }
+  .yn { display: grid; grid-template-columns: 1fr 1fr; gap: var(--ct-space-100); }
+  .yn button { min-height: var(--ct-size-touch-target-lg); border-radius: var(--ct-radius-md); border: 2px solid var(--ct-color-border-strong); background: var(--ct-color-surface-raised); font: var(--ct-type-label); font-size: var(--ct-font-size-112); display: inline-flex; align-items: center; justify-content: center; gap: var(--ct-space-100); cursor: pointer; }
+  .yn button[aria-pressed="true"] { border-color: var(--ct-color-brand-primary); background: var(--ct-color-surface-selected); color: var(--ct-color-text-brand); }
+  .opts { display: flex; flex-wrap: wrap; gap: var(--ct-space-100); }
+  .opts button { min-height: var(--ct-size-touch-target); padding: 0 var(--ct-space-200); border-radius: var(--ct-radius-pill); border: 1px solid var(--ct-color-border-strong); background: var(--ct-color-surface-raised); font: var(--ct-type-body); cursor: pointer; }
+  .opts button[aria-pressed="true"] { background: var(--ct-color-brand-primary); border-color: var(--ct-color-brand-primary); color: var(--ct-color-text-on-brand); font-weight: var(--ct-font-weight-semibold); }
+  .capture { display: grid; grid-template-columns: 1fr 1fr; gap: var(--ct-space-100); }
+  .thumb { display: flex; align-items: center; gap: var(--ct-space-150); padding: var(--ct-space-100); border-radius: var(--ct-radius-md); background: var(--ct-color-surface-sunken); font: var(--ct-type-body-sm); }
+  .thumb .ph { width: 56px; height: 56px; border-radius: var(--ct-radius-sm); background: repeating-linear-gradient(45deg, var(--ct-color-slate-300), var(--ct-color-slate-300) 6px, var(--ct-color-slate-200) 6px, var(--ct-color-slate-200) 12px); display: grid; place-items: center; color: var(--ct-color-slate-700); }
+  .src-link { display: flex; gap: var(--ct-space-100); align-items: center; padding: var(--ct-space-150); border-radius: var(--ct-radius-md); border: 1px solid var(--ct-color-border-default); font: var(--ct-type-body-sm); }
+  .actionbar { grid-template-columns: minmax(0,1fr) minmax(0,2fr); }
+  @container app (min-width: 1024px) { .content > .seg { justify-self: start; min-width: 420px; } }
+  @container app (min-width: 1024px) { .actionbar { position: static; box-shadow: none; padding: 0; background: transparent; } }
+</style>
+</head>
+<body>
+<!--ICONS-->
+<div class="mk-stage">
+<div class="mk-frame">
+<div class="mk-example">Example data · Harbor &amp; Pine Market (fictional)</div>
+<div class="ct-app">
+<div class="shell">
+  <nav class="sidenav" aria-label="Main">
+    <div class="brand"><img src="../logo.svg" alt="ColsTorso"></div>
+    <a href="#"><svg class="i"><use href="#i-sun"/></svg>Today</a>
+    <a href="#"><svg class="i"><use href="#i-target"/></svg>Missions<span class="count">7</span></a>
+    <a href="#" aria-current="page"><svg class="i"><use href="#i-list-checks"/></svg>Tasks<span class="count">4</span></a>
+    <a href="#"><svg class="i"><use href="#i-chart-line"/></svg>Impact</a>
+    <a href="#"><svg class="i"><use href="#i-lightbulb"/></svg>Best practices</a>
+    <a href="#"><svg class="i"><use href="#i-sparkles"/></svg>Ask ColsTorso</a>
+    <div class="foot"><a href="#"><svg class="i"><use href="#i-settings"/></svg>Settings</a></div>
+  </nav>
+  <div class="main">
+    <header class="topbar">
+      <img class="logo" src="../logo-mark.svg" alt="ColsTorso">
+      <div class="ctx"><b>Tasks · S014 Lakeview</b><span>Mon 12 Oct</span></div>
+      <button class="iconbtn" aria-label="Scan a barcode"><svg class="i"><use href="#i-scan-barcode"/></svg></button>
+      <span class="avatar" role="img" aria-label="Jordan Okafor">JO</span>
+    </header>
+    <div class="offline" role="status" data-note="1">
+      <svg class="i"><use href="#i-cloud-off"/></svg>
+      <span><b>You're offline.</b> 3 updates are saved on this device and will sync when you reconnect.</span>
+    </div>
+    <main class="content">
+      <div class="seg" role="group" aria-label="Show tasks" data-note="2"><button aria-pressed="true">Today · 4</button><button aria-pressed="false">This week · 9</button><button aria-pressed="false">Done</button></div>
+      <div class="tg">
+        <div>
+          <div class="grp"><span>Due by 11 AM</span><span>~25 min</span></div>
+          <section class="card list" aria-label="Due by 11 AM" data-note="3">
+            <div class="task sel">
+              <button class="check" role="checkbox" aria-checked="false" aria-label="Mark done: Check Hot Drinks Bar machine"><span></span></button>
+              <div><div class="t">Check the Hot Drinks Bar machine</div>
+                <div class="m"><span class="chip p-must" style="padding:1px 6px"><svg class="i"><use href="#i-flame"/></svg>Must</span><span><svg class="i i-sm"><use href="#i-target"/></svg>From mission</span><span><svg class="i i-sm"><use href="#i-clock"/></svg>10 min</span></div></div>
+              <span class="sync"><svg class="i i-sm"><use href="#i-cloud-off"/></svg>Saved</span>
+            </div>
+            <div class="task">
+              <button class="check" role="checkbox" aria-checked="false" aria-label="Mark done: Brief Bakery team"><span></span></button>
+              <div><div class="t">Brief the Bakery team on the 4 PM markdown</div>
+                <div class="m"><span><svg class="i i-sm"><use href="#i-target"/></svg>From mission</span><span><svg class="i i-sm"><use href="#i-user"/></svg>Sam</span><span><svg class="i i-sm"><use href="#i-clock"/></svg>5 min</span></div></div>
+              <svg class="i muted" style="margin-top:12px"><use href="#i-chevron-right"/></svg>
+            </div>
+            <div class="task done">
+              <button class="check" role="checkbox" aria-checked="true" aria-label="Done: Snacks bay 4 planogram check"><span><svg class="i i-sm"><use href="#i-check"/></svg></span></button>
+              <div><div class="t">Snacks bay 4 planogram check</div>
+                <div class="m"><span><svg class="i i-sm"><use href="#i-megaphone"/></svg>HQ campaign</span><span><svg class="i i-sm"><use href="#i-camera"/></svg>Photo added</span></div></div>
+              <span class="sync"><svg class="i i-sm"><use href="#i-cloud-off"/></svg>Saved</span>
+            </div>
+          </section>
+          <div class="grp" style="margin-top:var(--ct-space-200)"><span>Later today</span><span>~12 min</span></div>
+          <section class="card list" aria-label="Later today">
+            <div class="task">
+              <button class="check" role="checkbox" aria-checked="false" aria-label="Mark done: Fresh storewalk"><span></span></button>
+              <div><div class="t">Fresh storewalk (10 quick questions)</div>
+                <div class="m"><span><svg class="i i-sm"><use href="#i-clipboard-check"/></svg>Weekly routine</span><span><svg class="i i-sm"><use href="#i-clock"/></svg>12 min</span><span>Due 4 PM</span></div></div>
+              <svg class="i muted" style="margin-top:12px"><use href="#i-chevron-right"/></svg>
+            </div>
+          </section>
+        </div>
+
+        <section class="card card-pad detail" aria-labelledby="td-h" data-note="4">
+          <div><span class="eyebrow">Task 1 of 4</span><h2 id="td-h" class="h3" style="margin-top:4px">Check the Hot Drinks Bar machine</h2></div>
+          <div class="q"><span class="lbl">Is the machine working?</span>
+            <div class="yn"><button aria-pressed="false"><svg class="i"><use href="#i-check"/></svg>Yes</button><button aria-pressed="true"><svg class="i"><use href="#i-x"/></svg>No</button></div></div>
+          <div class="q" data-note="5"><span class="lbl">What's wrong?</span>
+            <div class="opts"><button aria-pressed="false">No power</button><button aria-pressed="true">Error code</button><button aria-pressed="false">Till button missing</button><button aria-pressed="false">Other</button></div></div>
+          <div class="q"><span class="lbl">Evidence</span>
+            <div class="capture" data-note="6"><button class="btn btn-secondary btn-lg"><svg class="i"><use href="#i-camera"/></svg>Photo</button><button class="btn btn-secondary btn-lg"><svg class="i"><use href="#i-mic"/></svg>Voice note</button></div>
+            <div class="thumb"><span class="ph"><svg class="i"><use href="#i-camera"/></svg></span><span>Photo · 7:48 AM<br><span class="muted">Will upload when online</span></span></div></div>
+          <div class="src-link" data-note="7"><svg class="i" style="color:var(--ct-color-text-brand)"><use href="#i-target"/></svg><span>Part of mission <b>"Hot Drinks Bar has almost no sales"</b>. If it's broken, we'll log a repair ticket and pause the mission. You won't be blamed for the sales drop.</span></div>
+          <div class="actionbar">
+            <button class="btn btn-secondary btn-lg">Skip</button>
+            <button class="btn btn-primary btn-lg"><svg class="i"><use href="#i-check"/></svg>Done, next task</button>
+          </div>
+        </section>
+      </div>
+    </main>
+    <nav class="tabbar" aria-label="Main">
+      <a href="#"><svg class="i i-lg"><use href="#i-sun"/></svg>Today</a>
+      <a href="#"><svg class="i i-lg"><use href="#i-target"/></svg>Missions</a>
+      <a href="#" aria-current="page"><svg class="i i-lg"><use href="#i-list-checks"/></svg>Tasks<span class="badge">4</span></a>
+      <a href="#"><svg class="i i-lg"><use href="#i-chart-line"/></svg>Impact</a>
+      <a href="#"><svg class="i i-lg"><use href="#i-sparkles"/></svg>Ask</a>
+    </nav>
+  </div>
+</div>
+</div>
+</div>
+<aside class="mk-notes" aria-label="Design annotations">
+  <h2>Store tasks · built for the shop floor</h2>
+  <p class="sub">Works with one hand, gloves on, in a back room with no signal.</p>
+  <ol>
+    <li data-n="1"><span><b>Offline is a normal state</b>A clear, high-contrast banner says what is saved on the phone. Nothing is lost and nothing gets stuck. Each item shows "Saved" until it syncs.<small>Fixes: flaky connection in store (P4)</small></span></li>
+    <li data-n="2"><span><b>Three simple filters</b>Today, This week and Done, with counts. No folders or settings to learn.<small>Fixes: too many tasks (P1)</small></span></li>
+    <li data-n="3"><span><b>Grouped by deadline, with time estimates</b>Each task shows where it came from (mission, HQ campaign or routine), who owns it and how long it takes. Large tick boxes, with the task name in the accessible label.<small>Fixes: unclear why, task overload (P1, P2)</small></span></li>
+    <li data-n="4"><span><b>Answer in a few taps</b>Yes/No as 56 px buttons, then quick-pick answers. On mobile this is a full screen that opens from the list. On desktop it sits beside the list.<small>Fixes: slow data entry (P3)</small></span></li>
+    <li data-n="5"><span><b>Pick, don't type</b>Common answers are buttons. "Other" opens voice or text, so the keyboard is a last resort.<small>Fixes: slow data entry (P3)</small></span></li>
+    <li data-n="6"><span><b>Photo and voice as evidence</b>Proof of work that actually happened, instead of a tick for a display that hasn't arrived. Uploads wait and retry on their own.<small>Fixes: tick-box compliance (P3, P6)</small></span></li>
+    <li data-n="7"><span><b>Shows how this links to the mission</b>The task explains what happens next, including that a broken machine pauses the mission so the store isn't blamed.<small>Fixes: the gap between HQ and stores, trust in impact numbers (P5, P6)</small></span></li>
+  </ol>
+</aside>
+</div>
+<script src="mk.js"></script>
+</body>
+</html>

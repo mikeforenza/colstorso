@@ -1,0 +1,4 @@
+-r requirements.txt
+pytest==9.1.1             # MIT
+httpx==0.28.1             # BSD-3-Clause
+playwright==1.63.0        # Apache-2.0 (screenshots / browser e2e only)

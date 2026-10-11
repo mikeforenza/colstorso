@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Store comparison — ColsTorso (Regional manager) · Example data</title>
+<link rel="stylesheet" href="../tokens.css"><link rel="stylesheet" href="ct-components.css">
+<style>
+  .rg { display: grid; grid-template-columns: minmax(0,1fr); gap: var(--ct-space-200); }
+  @container app (min-width: 1024px) { .rg { grid-template-columns: minmax(0,1fr) 336px; gap: var(--ct-space-200); align-items: start; } }
+  .pagehead { display: flex; flex-wrap: wrap; gap: var(--ct-space-150); align-items: end; justify-content: space-between; }
+  .scope { display: flex; gap: var(--ct-space-100); flex-wrap: wrap; }
+  .select { display: inline-flex; align-items: center; gap: var(--ct-space-100); min-height: var(--ct-size-touch-target); padding: 0 var(--ct-space-150); border: 1px solid var(--ct-color-border-strong); border-radius: var(--ct-radius-md); background: var(--ct-color-surface-raised); font: var(--ct-type-label); font-size: var(--ct-font-size-100); }
+  .theme { display: grid; grid-template-columns: auto 1fr; gap: var(--ct-space-150); padding: var(--ct-space-200); border-radius: var(--ct-radius-lg); background: var(--ct-color-status-info-bg); border: 1px solid var(--ct-color-status-info-border); }
+  .theme > .i { color: var(--ct-color-status-info-fg); }
+  .theme .acts { grid-column: 2; display: flex; gap: var(--ct-space-100); flex-wrap: wrap; }
+  @container app (min-width: 1024px) { .theme { grid-template-columns: auto 1fr auto; align-items: center; } .theme .acts { grid-column: 3; } }
+  .tblwrap { overflow-x: auto; }
+  .tblbar .seg { flex: none; }
+  .tbl td, .tbl th { padding-left: 10px; padding-right: 10px; }
+  .tbl .store { min-width: 200px; }
+  .tbl .store b { display: block; font: var(--ct-type-label); font-size: var(--ct-font-size-100); }
+  .tbl .store span { font: var(--ct-type-caption); color: var(--ct-color-text-muted); }
+  .rk { display: inline-grid; flex: none; place-items: center; text-align: center; width: 28px; height: 28px; border-radius: var(--ct-radius-circle); background: var(--ct-color-surface-sunken); font: var(--ct-type-label); }
+  .rk.gold { background: var(--ct-color-marigold-100); color: var(--ct-color-marigold-900); }
+  .mini { display: inline-block; width: 64px; height: 8px; border-radius: 4px; background: var(--ct-color-surface-sunken); border: 1px solid var(--ct-color-border-default); vertical-align: middle; margin-left: 6px; overflow: hidden; }
+  .mini span { display: block; height: 100%; background: var(--ct-color-brand-primary); }
+  .tblbar { display: flex; flex-wrap: wrap; gap: var(--ct-space-150); align-items: center; justify-content: space-between; padding: var(--ct-space-150) var(--ct-space-200); border-bottom: 1px solid var(--ct-color-border-default); }
+  .drawer { display: grid; gap: var(--ct-space-200); }
+  .drawer .hd { display: flex; gap: var(--ct-space-150); align-items: start; }
+  .focus { display: grid; gap: var(--ct-space-100); }
+  .focus .f { display: grid; grid-template-columns: auto 1fr; gap: var(--ct-space-100); font: var(--ct-type-body-sm); padding: var(--ct-space-100) 0; border-top: 1px solid var(--ct-color-border-subtle); }
+  .vchk { display: flex; align-items: center; gap: var(--ct-space-050); min-height: 48px; font: var(--ct-type-body); border-top: 1px solid var(--ct-color-border-subtle); }
+  .vchk .grow { flex: 1; }
+  .scard { display: grid; gap: var(--ct-space-100); padding: var(--ct-space-150) var(--ct-space-200); border-top: 1px solid var(--ct-color-border-subtle); }
+  .scard .top { display: flex; align-items: center; gap: var(--ct-space-150); }
+  .scard .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--ct-space-100); font: var(--ct-type-body-sm); }
+  .scard .stats b { display: block; font: var(--ct-type-label); font-size: var(--ct-font-size-100); }
+</style>
+</head>
+<body>
+<!--ICONS-->
+<div class="mk-stage">
+<div class="mk-frame">
+<div class="mk-example">Example data · Harbor &amp; Pine Market (fictional)</div>
+<div class="ct-app">
+<div class="shell">
+  <nav class="sidenav" aria-label="Main">
+    <div class="brand"><img src="../logo.svg" alt="ColsTorso"></div>
+    <a href="#"><svg class="i"><use href="#i-sun"/></svg>Today</a>
+    <a href="#" aria-current="page"><svg class="i"><use href="#i-store"/></svg>My stores</a>
+    <a href="#"><svg class="i"><use href="#i-map-pin"/></svg>Visits<span class="count">3</span></a>
+    <a href="#"><svg class="i"><use href="#i-target"/></svg>Plans to review<span class="count">6</span></a>
+    <a href="#"><svg class="i"><use href="#i-chart-line"/></svg>Impact</a>
+    <a href="#"><svg class="i"><use href="#i-lightbulb"/></svg>Best practices</a>
+    <a href="#"><svg class="i"><use href="#i-sparkles"/></svg>Ask ColsTorso</a>
+    <div class="foot"><a href="#"><svg class="i"><use href="#i-settings"/></svg>Settings</a></div>
+  </nav>
+  <div class="main">
+    <header class="topbar">
+      <img class="logo" src="../logo-mark.svg" alt="ColsTorso">
+      <div class="ctx"><b>North region · 26 stores</b><span>Avery Lindqvist · Regional manager · Week 41</span></div>
+      <button class="iconbtn" aria-label="Search stores"><svg class="i"><use href="#i-search"/></svg></button>
+      <button class="iconbtn" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg></button>
+      <span class="avatar" role="img" aria-label="Avery Lindqvist">AL</span>
+    </header>
+    <div class="fresh" role="status" data-note="7">
+      <span class="src ok"><svg class="i i-sm"><use href="#i-circle-check"/></svg>Sales, waste, tasks: through Sun 11 Oct</span>
+      <span class="src stale"><svg class="i i-sm"><use href="#i-triangle-alert"/></svg>Labor missing for 2 stores (S031, S040)</span>
+      <span class="muted">Updated 5:10 AM</span>
+    </div>
+    <main class="content">
+      <div class="pagehead">
+        <div><h1 class="h1">Store comparison</h1><p class="lede">Who's improving, who needs help, and where to go this week.</p></div>
+        <div class="scope"><span class="select">All 3 districts<svg class="i i-sm"><use href="#i-chevron-down"/></svg></span><span class="select">Last 4 weeks<svg class="i i-sm"><use href="#i-chevron-down"/></svg></span></div>
+      </div>
+      <div class="kpis" data-note="1">
+        <div class="card kpi"><span class="k">Missions accepted</span><span class="v num">74%</span><span class="d imp-pos"><svg class="i i-sm"><use href="#i-trending-up"/></svg>+6 pts vs last month</span></div>
+        <div class="card kpi"><span class="k">Measured impact</span><span class="v num">+$38.4k<small style="font-size:var(--ct-font-size-100)">/wk</small></span><span class="d sec">Compared with similar stores</span></div>
+        <div class="card kpi"><span class="k">Plans to review</span><span class="v num">6</span><span class="d imp-neg"><svg class="i i-sm"><use href="#i-clock"/></svg>2 waiting &gt; 3 days</span></div>
+        <div class="card kpi"><span class="k">Overdue tasks</span><span class="v num">17</span><span class="d imp-neg"><svg class="i i-sm"><use href="#i-trending-up"/></svg>11 in 2 stores</span></div>
+      </div>
+      <div class="theme" role="note" data-note="2">
+        <svg class="i i-lg"><use href="#i-lightbulb"/></svg>
+        <div><b>Pattern across stores: Bakery waste is up in 5 Lakes stores.</b><br><span style="font:var(--ct-type-body-sm)">3 managers gave the same reason: "Thursday delivery moved to 6 AM". It probably can't be fixed in store.</span></div>
+        <div class="acts"><button class="btn btn-primary"><svg class="i"><use href="#i-send"/></svg>Raise with Supply</button><button class="btn btn-secondary">See 5 stores</button></div>
+      </div>
+
+      <div class="rg">
+        <section class="card" aria-labelledby="lb-h">
+          <div class="tblbar">
+            <h2 id="lb-h" class="h3">Leaderboard</h2>
+            <div class="seg" role="group" aria-label="Rank stores by" data-note="3">
+              <button aria-pressed="true">Improvement</button><button aria-pressed="false">Impact $</button><button aria-pressed="false">Vs plan</button>
+            </div>
+          </div>
+          <div class="tblwrap desktop-only">
+          <table class="tbl" data-note="4">
+            <thead><tr><th>#</th><th>Store</th><th class="r">Improvement ▾</th><th class="r">$/wk</th><th class="r">Accepted</th><th class="r">Overdue</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td><span class="rk gold">1</span></td><td class="store"><b>S009 Oak Hill Express</b><span>Riley Silva · Valley · visited 2 Oct</span></td><td class="r imp-pos">+9.4%</td><td class="r">+$4.1k</td><td class="r">8 of 9</td><td class="r">0</td><td><span class="chip s-success"><svg class="i"><use href="#i-trophy"/></svg>Top</span></td></tr>
+              <tr><td><span class="rk gold">2</span></td><td class="store"><b>S014 Lakeview Standard</b><span>Jordan Okafor · Lakes · visited 25 Sep</span></td><td class="r imp-pos">+6.1%</td><td class="r">+$3.2k</td><td class="r">6 of 8</td><td class="r">1</td><td><span class="chip s-neutral"><svg class="i"><use href="#i-circle-check"/></svg>OK</span></td></tr>
+              <tr><td><span class="rk gold">3</span></td><td class="store"><b>S027 Riverside Superstore</b><span>Casey Novak · Metro North · visited 30 Sep</span></td><td class="r imp-pos">+4.8%</td><td class="r">+$6.9k</td><td class="r">7 of 9</td><td class="r">2</td><td><span class="chip s-neutral"><svg class="i"><use href="#i-circle-check"/></svg>OK</span></td></tr>
+              <tr><td><span class="rk">4</span></td><td class="store"><b>S033 Fairview Standard</b><span>Peyton Ito · Lakes · visited 18 Sep</span></td><td class="r imp-pos">+2.2%</td><td class="r">+$1.4k</td><td class="r">4 of 7</td><td class="r">0</td><td><span class="chip s-neutral"><svg class="i"><use href="#i-circle-check"/></svg>OK</span></td></tr>
+              <tr><td><span class="rk">5</span></td><td class="store"><b>S040 Brookfield Superstore</b><span>Toby Kim · Valley · visited 9 Sep</span></td><td class="r imp-neu">+0.3%</td><td class="r">+$0.4k</td><td class="r">3 of 8</td><td class="r">3</td><td><span class="chip s-warning"><svg class="i"><use href="#i-database"/></svg>Data gap</span></td></tr>
+              <tr class="sel" aria-selected="true"><td><span class="rk">6</span></td><td class="store"><b>S022 Cedar Falls Express</b><span>Morgan Haddad · Lakes · visited 21 Aug</span></td><td class="r imp-neg">−3.7%</td><td class="r">−$0.9k</td><td class="r">1 of 7</td><td class="r">8</td><td><span class="chip s-danger"><svg class="i"><use href="#i-triangle-alert"/></svg>Visit</span></td></tr>
+              <tr><td><span class="rk">7</span></td><td class="store"><b>S031 Westport Standard</b><span>Quinn Abara · Metro North · visited 12 Sep</span></td><td class="r imp-neg">−4.2%</td><td class="r">−$1.6k</td><td class="r">2 of 8</td><td class="r">3</td><td><span class="chip s-danger"><svg class="i"><use href="#i-triangle-alert"/></svg>Visit</span></td></tr>
+            </tbody>
+          </table>
+          </div>
+          <div class="mobile-only">
+            <div class="scard"><div class="top"><span class="rk gold">1</span><div class="grow" style="flex:1"><b>S009 Oak Hill Express</b><br><span class="muted" style="font:var(--ct-type-caption)">Riley Silva · Valley</span></div><span class="chip s-success"><svg class="i"><use href="#i-trophy"/></svg>Recognise</span></div>
+              <div class="stats"><span>Improvement<b class="imp-pos">+9.4%</b></span><span>Impact/wk<b>+$4.1k</b></span><span>Overdue<b>0</b></span></div></div>
+            <div class="scard"><div class="top"><span class="rk gold">2</span><div style="flex:1"><b>S014 Lakeview Standard</b><br><span class="muted" style="font:var(--ct-type-caption)">Jordan Okafor · Lakes</span></div><span class="chip s-neutral"><svg class="i"><use href="#i-circle-check"/></svg>On track</span></div>
+              <div class="stats"><span>Improvement<b class="imp-pos">+6.1%</b></span><span>Impact/wk<b>+$3.2k</b></span><span>Overdue<b>1</b></span></div></div>
+            <div class="scard" style="background:var(--ct-color-surface-selected)"><div class="top"><span class="rk">6</span><div style="flex:1"><b>S022 Cedar Falls Express</b><br><span class="muted" style="font:var(--ct-type-caption)">Morgan Haddad · Lakes</span></div><span class="chip s-danger"><svg class="i"><use href="#i-triangle-alert"/></svg>Visit</span></div>
+              <div class="stats"><span>Improvement<b class="imp-neg">−3.7%</b></span><span>Impact/wk<b>−$0.9k</b></span><span>Overdue<b>8</b></span></div></div>
+            <a class="row" href="#" style="text-decoration:none;color:inherit"><span class="grow t">See all 26 stores</span><svg class="i muted"><use href="#i-chevron-right"/></svg></a>
+          </div>
+        </section>
+
+        <aside class="card card-pad drawer" aria-label="Selected store: S022 Cedar Falls Express" data-note="5">
+          <div class="hd"><span class="avatar">MH</span><div style="flex:1"><h2 class="h4">S022 Cedar Falls Express</h2><p class="muted" style="font:var(--ct-type-body-sm)">Morgan Haddad · manager for 7 months</p></div></div>
+          <div class="focus">
+            <span class="eyebrow">What to focus on during the visit</span>
+            <div class="f"><svg class="i imp-neg"><use href="#i-list-checks"/></svg><span><b>8 overdue tasks</b>: 5 are HQ planogram checks from 3 weeks ago</span></div>
+            <div class="f"><svg class="i imp-neg"><use href="#i-target"/></svg><span><b>Only 1 of 7 missions accepted</b>: 4 were snoozed twice</span></div>
+            <div class="f"><svg class="i imp-pos"><use href="#i-trending-up"/></svg><span><b>Doing well:</b> customer score up 3 points in 4 weeks</span></div>
+          </div>
+          <div data-note="6">
+            <span class="eyebrow">Visit checklist · Thu 15 Oct</span>
+            <div class="vchk"><button class="check" role="checkbox" aria-checked="true" aria-label="Review snoozed missions with Morgan"><span><svg class="i i-sm"><use href="#i-check"/></svg></span></button><span class="grow">Go through snoozed missions with Morgan</span></div>
+            <div class="vchk"><button class="check" role="checkbox" aria-checked="false" aria-label="Walk Fresh and Bakery"><span></span></button><span class="grow">Walk Fresh &amp; Bakery (take a photo)</span><svg class="i muted"><use href="#i-camera"/></svg></div>
+            <div class="vchk"><button class="check" role="checkbox" aria-checked="false" aria-label="Agree 2 actions"><span></span></button><span class="grow">Agree 2 actions, which become missions</span></div>
+            <div class="vchk"><button class="check" role="checkbox" aria-checked="false" aria-label="Give coaching note"><span></span></button><span class="grow">Leave a coaching note</span><svg class="i muted"><use href="#i-mic"/></svg></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--ct-space-100)"><button class="btn btn-secondary">Message</button><button class="btn btn-primary"><svg class="i"><use href="#i-map-pin"/></svg>Start visit</button></div>
+        </aside>
+      </div>
+    </main>
+    <nav class="tabbar" aria-label="Main">
+      <a href="#"><svg class="i i-lg"><use href="#i-sun"/></svg>Today</a>
+      <a href="#" aria-current="page"><svg class="i i-lg"><use href="#i-store"/></svg>Stores</a>
+      <a href="#"><svg class="i i-lg"><use href="#i-map-pin"/></svg>Visits</a>
+      <a href="#"><svg class="i i-lg"><use href="#i-target"/></svg>Review<span class="badge">6</span></a>
+      <a href="#"><svg class="i i-lg"><use href="#i-sparkles"/></svg>Ask</a>
+    </nav>
+  </div>
+</div>
+</div>
+</div>
+<aside class="mk-notes" aria-label="Design annotations">
+  <h2>Regional manager · store comparison</h2>
+  <p class="sub">Answers three questions: who's improving, who needs help, and what to do on the next visit.</p>
+  <ol>
+    <li data-n="1"><span><b>Four numbers that matter</b>Accept rate, impact measured against similar stores, plans waiting for review and overdue tasks, each with a trend shown in words and an arrow.<small>Fixes: too many reports for field leaders (P1)</small></span></li>
+    <li data-n="2"><span><b>Patterns go up the chain</b>When several managers reject or snooze missions for the same reason, it becomes a pattern with a one-click hand-off to HQ or Supply. Store feedback finally gets back to head office.<small>Fixes: the gap between HQ and stores (P6)</small></span></li>
+    <li data-n="3"><span><b>Rank by improvement first</b>The default ranking is improvement against each store's own expected level. That recognises the best managers, not just the managers of the biggest stores. Ranking by raw $ or sales vs plan is one tap away.<small>Fixes: fairness worries, impact trust (P5)</small></span></li>
+    <li data-n="4"><span><b>Status as words and icons</b>"Visit" and "Data gap" are labelled chips with icons, never just a red cell. Numbers line up for easy scanning, and data gaps are shown openly instead of quietly lowering a score.<small>Fixes: meaning by colour alone, trust in the data (P5)</small></span></li>
+    <li data-n="5"><span><b>Visit focus picked for you</b>Selecting a store opens a short, data-based agenda with one thing to praise, so coaching stays balanced.<small>Fixes: unfocused store visits (P6)</small></span></li>
+    <li data-n="6"><span><b>A visit checklist that creates work</b>Agreed actions become missions with impact tracking, and photo and voice notes need no typing. It works offline in the store.<small>Fixes: visits that aren't followed up, slow data entry (P3, P6)</small></span></li>
+    <li data-n="7"><span><b>Missing data called out by store</b>Missing data is named by store, so a weak score isn't blamed on the manager.<small>Fixes: trust in the data (P5, P7)</small></span></li>
+  </ol>
+</aside>
+</div>
+<script src="mk.js"></script>
+</body>
+</html>

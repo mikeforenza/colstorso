@@ -1,0 +1,4 @@
+# Runtime (all permissive licences)
+fastapi==0.143.0          # MIT
+uvicorn==0.54.0           # BSD-3-Clause
+python-multipart==0.0.32  # Apache-2.0

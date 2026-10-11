@@ -1,0 +1,12 @@
+.venv
+data
+screenshots
+screens
+docs
+tests
+scripts
+design/png
+design/mockups
+design/scripts
+**/__pycache__
+*.db

@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Impact results — ColsTorso · Example data</title>
+<link rel="stylesheet" href="../tokens.css"><link rel="stylesheet" href="ct-components.css">
+<style>
+  .ig { display: grid; grid-template-columns: minmax(0,1fr); gap: var(--ct-space-200); }
+  @container app (min-width: 1024px) { .ig { grid-template-columns: minmax(0,1fr) 360px; gap: var(--ct-space-300); align-items: start; } }
+  .res-h { display: flex; flex-wrap: wrap; gap: var(--ct-space-100); align-items: center; }
+  .big { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: var(--ct-space-150); margin: var(--ct-space-200) 0; }
+  @container app (min-width: 1024px) { .big { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .big .card { padding: var(--ct-space-150) var(--ct-space-200); display: grid; gap: 2px; }
+  .big .k { font: var(--ct-type-label); color: var(--ct-color-text-secondary); }
+  .big .v { font: var(--ct-type-metric); font-size: var(--ct-font-size-187); }
+  .big .s { font: var(--ct-type-body-sm); color: var(--ct-color-text-secondary); }
+  .chart { width: 100%; height: auto; display: block; }
+  .legend { display: flex; flex-wrap: wrap; gap: var(--ct-space-200); font: var(--ct-type-body-sm); color: var(--ct-color-text-secondary); margin-top: var(--ct-space-100); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .sw { width: 22px; height: 0; border-top: 3px solid var(--ct-color-impact-store-line); }
+  .sw.c { border-top: 3px dashed var(--ct-color-impact-control-line); }
+  .sw.b { height: 12px; border: 0; background: var(--ct-color-impact-band); }
+  .plain { margin-top: var(--ct-space-200); padding: var(--ct-space-150) var(--ct-space-200); border-radius: var(--ct-radius-md); background: var(--ct-color-surface-sunken); font: var(--ct-type-body); }
+  .trust .r { display: grid; grid-template-columns: auto 1fr; gap: var(--ct-space-100); padding: var(--ct-space-100) 0; border-top: 1px solid var(--ct-color-border-subtle); font: var(--ct-type-body-sm); }
+  .trust .r:first-of-type { border-top: 0; }
+  .hist .row .chip { margin-bottom: var(--ct-space-050); }
+  @container app (max-width: 1023.98px) { .big .card:last-child { grid-column: 1 / -1; } }
+  .acts { display: flex; gap: var(--ct-space-100); flex-wrap: wrap; margin-top: var(--ct-space-200); }
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-alarm-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8" />
+  <path d="M12 9v4l2 2" />
+  <path d="M5 3 2 6" />
+  <path d="m22 6-3-3" />
+  <path d="M6.38 18.7 4 21" />
+  <path d="M17.64 18.67 20 21" /></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" />
+  <path d="m12 5 7 7-7 7" /></symbol><symbol id="i-arrow-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7" />
+  <path d="M12 19V5" /></symbol><symbol id="i-badge-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+  <path d="m16 9-5.5 5.5L8 12" /></symbol><symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0" />
+  <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" /></symbol><symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v3" />
+  <path d="M16 2v3" />
+  <rect x="3" y="3" width="18" height="18" rx="2" />
+  <path d="M3 9h18" /></symbol><symbol id="i-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z" />
+  <circle cx="12" cy="13" r="3" /></symbol><symbol id="i-chart-column" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16" />
+  <path d="M18 17V9" />
+  <path d="M13 17V5" />
+  <path d="M8 17v-3" /></symbol><symbol id="i-chart-line" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16" />
+  <path d="m19 9-5 5-4-4-3 3" /></symbol><symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></symbol><symbol id="i-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></symbol><symbol id="i-circle-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" />
+  <path d="m16 9-5.5 5.5L8 12" /></symbol><symbol id="i-circle-help" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" />
+  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+  <path d="M12 17h.01" /></symbol><symbol id="i-clipboard-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+  <path d="m9 14 2 2 4-4" /></symbol><symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" />
+  <path d="M12 6v6l4 2" /></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.94 5.274A7 7 0 0 1 15.71 10h1.79a4.5 4.5 0 0 1 4.222 6.057" />
+  <path d="M18.796 18.81A4.5 4.5 0 0 1 17.5 19H9A7 7 0 0 1 5.79 5.78" />
+  <path d="m2 2 20 20" /></symbol><symbol id="i-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3" />
+  <path d="M3 5V19A9 3 0 0 0 21 19V5" />
+  <path d="M3 12A9 3 0 0 0 21 12" /></symbol><symbol id="i-ellipsis" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1" />
+  <circle cx="19" cy="12" r="1" />
+  <circle cx="5" cy="12" r="1" /></symbol><symbol id="i-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4" /></symbol><symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" />
+  <path d="M12 16v-4" />
+  <path d="M12 8h.01" /></symbol><symbol id="i-layout-dashboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1" />
+  <rect width="7" height="5" x="14" y="3" rx="1" />
+  <rect width="7" height="9" x="14" y="12" rx="1" />
+  <rect width="7" height="5" x="3" y="16" rx="1" /></symbol><symbol id="i-lightbulb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+  <path d="M9 18h6" />
+  <path d="M10 22h4" /></symbol><symbol id="i-list-checks" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 5h8" />
+  <path d="M13 12h8" />
+  <path d="M13 19h8" />
+  <path d="m3 17 2 2 4-4" />
+  <path d="m3 7 2 2 4-4" /></symbol><symbol id="i-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" /></symbol><symbol id="i-megaphone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 6a13 13 0 0 0 8.4-2.8A1 1 0 0 1 21 4v12a1 1 0 0 1-1.6.8A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" />
+  <path d="M6 14a12 12 0 0 0 2.4 7.2 2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14" />
+  <path d="M8 6v8" /></symbol><symbol id="i-message-square" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /></symbol><symbol id="i-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19v3" />
+  <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+  <rect x="9" y="2" width="6" height="13" rx="3" /></symbol><symbol id="i-minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /></symbol><symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" />
+  <path d="M12 5v14" /></symbol><symbol id="i-scan-barcode" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2" />
+  <path d="M17 3h2a2 2 0 0 1 2 2v2" />
+  <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
+  <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
+  <path d="M8 7v10" />
+  <path d="M12 7v10" />
+  <path d="M17 7v10" /></symbol><symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34" />
+  <circle cx="11" cy="11" r="8" /></symbol><symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" />
+  <path d="m21.854 2.147-10.94 10.939" /></symbol><symbol id="i-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
+  <circle cx="12" cy="12" r="3" /></symbol><symbol id="i-shield-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+  <path d="m9 12 2 2 4-4" /></symbol><symbol id="i-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
+  <path d="M20 2v4" />
+  <path d="M22 4h-4" />
+  <circle cx="4" cy="20" r="2" /></symbol><symbol id="i-store" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5" />
+  <path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244" />
+  <path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05" /></symbol><symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4" />
+  <path d="M12 2v2" />
+  <path d="M12 20v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="m17.66 17.66 1.41 1.41" />
+  <path d="M2 12h2" />
+  <path d="M20 12h2" />
+  <path d="m6.34 17.66-1.41 1.41" />
+  <path d="m19.07 4.93-1.41 1.41" /></symbol><symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" />
+  <circle cx="12" cy="12" r="6" />
+  <circle cx="12" cy="12" r="2" /></symbol><symbol id="i-thumbs-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z" />
+  <path d="M7 10v12" /></symbol><symbol id="i-trending-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 17h6v-6" />
+  <path d="m22 17-8.5-8.5-5 5L2 7" /></symbol><symbol id="i-trending-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 7h6v6" />
+  <path d="m22 7-8.5 8.5-5-5L2 17" /></symbol><symbol id="i-triangle-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+  <path d="M12 9v4" />
+  <path d="M12 17h.01" /></symbol><symbol id="i-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14.66V17a1 1 0 0 1-1 1 2 2 0 0 0-2 2v2" />
+  <path d="M14 14.66V17a1 1 0 0 0 1 1 2 2 0 0 1 2 2v2" />
+  <path d="M17.916 10H19.5A2.5 2.5 0 0 0 22 7.5V5a1 1 0 0 0-1-1h-3" />
+  <path d="M4 22h16" />
+  <path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z" />
+  <path d="M6.084 10H4.5A2.5 2.5 0 0 1 2 7.5V5a1 1 0 0 1 1-1h3" /></symbol><symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+  <circle cx="12" cy="7" r="4" /></symbol><symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+  <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+  <circle cx="9" cy="7" r="4" /></symbol><symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18" />
+  <path d="m6 6 12 12" /></symbol></svg>
+<div class="mk-stage">
+<div class="mk-frame">
+<div class="mk-example">Example data · Harbor &amp; Pine Market (fictional)</div>
+<div class="ct-app">
+<div class="shell">
+  <nav class="sidenav" aria-label="Main">
+    <div class="brand"><img src="../logo.svg" alt="ColsTorso"></div>
+    <a href="#"><svg class="i"><use href="#i-sun"/></svg>Today</a>
+    <a href="#"><svg class="i"><use href="#i-target"/></svg>Missions<span class="count">7</span></a>
+    <a href="#"><svg class="i"><use href="#i-list-checks"/></svg>Tasks<span class="count">4</span></a>
+    <a href="#" aria-current="page"><svg class="i"><use href="#i-chart-line"/></svg>Impact</a>
+    <a href="#"><svg class="i"><use href="#i-lightbulb"/></svg>Best practices</a>
+    <a href="#"><svg class="i"><use href="#i-sparkles"/></svg>Ask ColsTorso</a>
+    <div class="foot"><a href="#"><svg class="i"><use href="#i-settings"/></svg>Settings</a></div>
+  </nav>
+  <div class="main">
+    <header class="topbar">
+      <img class="logo" src="../logo-mark.svg" alt="ColsTorso">
+      <div class="ctx"><b>Impact · S014 Lakeview Standard</b><span>Results measured against similar stores</span></div>
+      <span class="avatar" role="img" aria-label="Jordan Okafor">JO</span>
+    </header>
+    <div class="fresh" role="status"><span class="src ok"><svg class="i i-sm"><use href="#i-circle-check"/></svg>Results through Sun 11 Oct · next update Mon 19 Oct</span></div>
+    <main class="content">
+      <div class="ig">
+        <div style="display:grid;gap:var(--ct-space-200)">
+          <section class="card card-pad" aria-labelledby="r-h">
+            <div class="res-h"><span class="chip s-success"><svg class="i"><use href="#i-badge-check"/></svg>It worked</span><span class="chip kind">Completed 11 Oct · 4 weeks</span></div>
+            <h1 id="r-h" class="h1" style="margin-top:var(--ct-space-100);font-size:var(--ct-font-size-150)">Coffee &amp; Tea end-cap reset</h1>
+            <div class="big" data-note="1">
+              <div class="card"><span class="k">Extra sales from this</span><span class="v imp-pos num">+$460<small style="font-size:var(--ct-font-size-100)">/wk</small></span><span class="s">likely range +$210 to +$710</span></div>
+              <div class="card"><span class="k">Over 4 weeks</span><span class="v num">+$1,840</span><span class="s">after removing the seasonal lift</span></div>
+              <div class="card"><span class="k">How sure are we</span><span class="v">High</span><span class="s">8 of 10 similar results held up</span></div>
+            </div>
+            <figure style="margin:0" data-note="2">
+              <svg class="chart desktop-only" viewBox="0 0 640 230" role="img" aria-labelledby="ch-t ch-d">
+                <title id="ch-t">Weekly Coffee &amp; Tea sales, your store vs comparison group</title>
+                <desc id="ch-d">Before the mission both lines track together near 100. After the start in week 37 your store rises to about 116 while the comparison group stays near 102.</desc>
+                <g font-family="Inter" font-size="12" fill="var(--ct-color-text-muted)">
+                  <line x1="40" y1="190" x2="630" y2="190" stroke="var(--ct-color-border-default)"/>
+                  <line x1="40" y1="130" x2="630" y2="130" stroke="var(--ct-color-border-subtle)"/>
+                  <line x1="40" y1="70" x2="630" y2="70" stroke="var(--ct-color-border-subtle)"/>
+                  <text x="32" y="194" text-anchor="end">90</text><text x="32" y="134" text-anchor="end">100</text><text x="32" y="74" text-anchor="end">110</text><text x="32" y="16" text-anchor="end">120</text>
+                  <text x="40" y="212">Wk 29</text><text x="384" y="212" text-anchor="middle">Wk 37</text><text x="630" y="212" text-anchor="end">Wk 41</text>
+                </g>
+                <rect x="384" y="6" width="246" height="184" fill="var(--ct-color-surface-sunken)" opacity=".6"/>
+                <line x1="384" y1="6" x2="384" y2="190" stroke="var(--ct-color-text-secondary)" stroke-width="1.5" stroke-dasharray="3 3"/>
+                <text x="392" y="182" font-family="Inter" font-size="12" font-weight="600" fill="var(--ct-color-text-secondary)">Mission started</text>
+                <polygon points="384,124 445,88 507,56 568,36 630,20 630,52 568,64 507,84 445,112 384,136" fill="var(--ct-color-impact-band)"/>
+                <polyline fill="none" stroke="var(--ct-color-impact-control-line)" stroke-width="3" stroke-dasharray="7 5" points="40,132 83,128 126,134 169,130 212,126 255,133 298,129 341,131 384,130 445,126 507,124 568,120 630,118"/>
+                <polyline fill="none" stroke="var(--ct-color-impact-store-line)" stroke-width="3.5" stroke-linejoin="round" points="40,134 83,130 126,136 169,129 212,128 255,135 298,131 341,133 384,130 445,100 507,70 568,50 630,34"/>
+                <text x="620" y="22" text-anchor="end" font-family="Inter" font-size="12" font-weight="700" fill="var(--ct-color-impact-store-line)">Your store 116</text>
+                <text x="626" y="140" text-anchor="end" font-family="Inter" font-size="12" font-weight="700" fill="var(--ct-color-text-secondary)">Comparison 102</text>
+              </svg>
+              <svg class="chart mobile-only" viewBox="0 0 340 230" role="img" aria-label="Weekly Coffee and Tea sales: your store rises to about 116 after the mission started in week 37, while the comparison group stays near 102.">
+                <g font-family="Inter" font-size="12" fill="var(--ct-color-text-muted)">
+                  <line x1="28" y1="190" x2="335" y2="190" stroke="var(--ct-color-border-default)"/><line x1="28" y1="130" x2="335" y2="130" stroke="var(--ct-color-border-subtle)"/><line x1="28" y1="70" x2="335" y2="70" stroke="var(--ct-color-border-subtle)"/>
+                  <text x="22" y="194" text-anchor="end">90</text><text x="22" y="134" text-anchor="end">100</text><text x="22" y="74" text-anchor="end">110</text>
+                  <text x="28" y="212">Wk 29</text><text x="207" y="212" text-anchor="middle">Wk 37</text><text x="335" y="212" text-anchor="end">Wk 41</text>
+                </g>
+                <rect x="207" y="6" width="128" height="184" fill="var(--ct-color-surface-sunken)" opacity=".6"/>
+                <line x1="207" y1="6" x2="207" y2="190" stroke="var(--ct-color-text-secondary)" stroke-width="1.5" stroke-dasharray="3 3"/>
+                <polygon points="206.9,124 238.6,88 270.8,56 302.6,36 334.8,20 334.8,52 302.6,64 270.8,84 238.6,112 206.9,136" fill="var(--ct-color-impact-band)"/>
+                <polyline fill="none" stroke="var(--ct-color-impact-control-line)" stroke-width="3" stroke-dasharray="7 5" points="28.0,132 50.4,128 72.7,134 95.1,130 117.4,126 139.8,133 162.2,129 184.5,131 206.9,130 238.6,126 270.8,124 302.6,120 334.8,118"/>
+                <polyline fill="none" stroke="var(--ct-color-impact-store-line)" stroke-width="3.5" stroke-linejoin="round" points="28.0,134 50.4,130 72.7,136 95.1,129 117.4,128 139.8,135 162.2,131 184.5,133 206.9,130 238.6,100 270.8,70 302.6,50 334.8,34"/>
+                <text x="200" y="22" text-anchor="end" font-family="Inter" font-size="12" font-weight="600" fill="var(--ct-color-text-secondary)">Started</text>
+                <text x="335" y="20" text-anchor="end" font-family="Inter" font-size="12" font-weight="700" fill="var(--ct-color-impact-store-line)">116</text>
+                <text x="335" y="140" text-anchor="end" font-family="Inter" font-size="12" font-weight="700" fill="var(--ct-color-text-secondary)">102</text>
+              </svg>
+              <figcaption class="legend"><span><i class="sw"></i>Your store</span><span><i class="sw c"></i>22 similar stores (comparison)</span><span><i class="sw b"></i>Likely range</span><span class="muted">Sales index, week 29 = 100</span></figcaption>
+            </figure>
+            <p class="plain" data-note="3"><b>In plain words:</b> before the reset, your Coffee &amp; Tea sales moved in step with 22 similar stores. Afterwards yours rose about 14% more than theirs. Their small rise (seasonal) is <b>not</b> counted as yours.</p>
+            <div class="acts" data-note="4"><button class="btn btn-primary"><svg class="i"><use href="#i-lightbulb"/></svg>Share as best practice</button><button class="btn btn-secondary"><svg class="i"><use href="#i-thumbs-up"/></svg>Thank the team</button><button class="btn btn-ghost">Start a follow-up</button></div>
+          </section>
+
+          <section class="card hist" aria-labelledby="h-h" data-note="5">
+            <div class="section-h card-pad" style="padding-bottom:0;margin-bottom:var(--ct-space-100)"><h2 id="h-h" class="h3">All results · last 12 weeks</h2><a href="#">Filter</a></div>
+            <div class="row"><span class="grow"><span class="chip s-success"><svg class="i"><use href="#i-trending-up"/></svg>Worked</span><br><span class="t">Coffee &amp; Tea end-cap reset</span><br><span class="s">+$460/wk · high confidence</span></span><svg class="i muted"><use href="#i-chevron-right"/></svg></div>
+            <div class="row"><span class="grow"><span class="chip s-success"><svg class="i"><use href="#i-trending-up"/></svg>Worked</span><br><span class="t">Self-checkout downtime</span><br><span class="s">+$220/wk · medium confidence</span></span><svg class="i muted"><use href="#i-chevron-right"/></svg></div>
+            <div class="row"><span class="grow"><span class="chip s-neutral"><svg class="i"><use href="#i-minus"/></svg>No clear change</span><br><span class="t">Pet aisle gap scan</span><br><span class="s">Within normal variation · lessons logged</span></span><svg class="i muted"><use href="#i-chevron-right"/></svg></div>
+            <div class="row"><span class="grow"><span class="chip s-danger"><svg class="i"><use href="#i-trending-down"/></svg>Got worse</span><br><span class="t">Deli opening-hours change</span><br><span class="s">−$130/wk · reverted on 28 Sep</span></span><svg class="i muted"><use href="#i-chevron-right"/></svg></div>
+          </section>
+        </div>
+
+        <aside style="display:grid;gap:var(--ct-space-200)">
+          <section class="card card-pad trust" aria-labelledby="t-h" data-note="6">
+            <h2 id="t-h" class="h4" style="margin-bottom:var(--ct-space-100)">Can I trust this number?</h2>
+            <div class="r"><svg class="i imp-pos"><use href="#i-circle-check"/></svg><span><b>Fair comparison.</b> 22 Standard stores with similar Coffee &amp; Tea space, none running this mission.</span></div>
+            <div class="r"><svg class="i imp-pos"><use href="#i-circle-check"/></svg><span><b>Before and after tracked together.</b> The lines matched for 8 weeks beforehand.</span></div>
+            <div class="r"><svg class="i" style="color:var(--ct-color-status-warning-fg)"><use href="#i-triangle-alert"/></svg><span><b>One gap.</b> Week 39 had a promotion in 3 comparison stores, so we left those stores out of that week.</span></div>
+            <a href="#" style="font:var(--ct-type-label);display:inline-flex;min-height:44px;align-items:center">How ColsTorso measures impact</a>
+          </section>
+          <section class="card card-pad" aria-labelledby="s-h">
+            <h2 id="s-h" class="h4">Your store, last 12 weeks</h2>
+            <div class="big" style="grid-template-columns:1fr 1fr;margin-bottom:0">
+              <div><span class="k" style="font:var(--ct-type-label);color:var(--ct-color-text-secondary)">Measured total</span><div class="v imp-pos num" style="font:var(--ct-type-metric-sm)">+$9.6k</div></div>
+              <div><span class="k" style="font:var(--ct-type-label);color:var(--ct-color-text-secondary)">Missions done</span><div class="v num" style="font:var(--ct-type-metric-sm)">6</div></div>
+            </div>
+            <p class="sec" style="font:var(--ct-type-body-sm);margin-top:var(--ct-space-100)">4 worked · 1 no clear change · 1 got worse. Rank in district: <b>2 of 9</b> by improvement.</p>
+          </section>
+        </aside>
+      </div>
+    </main>
+    <nav class="tabbar" aria-label="Main">
+      <a href="#"><svg class="i i-lg"><use href="#i-sun"/></svg>Today</a>
+      <a href="#"><svg class="i i-lg"><use href="#i-target"/></svg>Missions</a>
+      <a href="#"><svg class="i i-lg"><use href="#i-list-checks"/></svg>Tasks<span class="badge">4</span></a>
+      <a href="#" aria-current="page"><svg class="i i-lg"><use href="#i-chart-line"/></svg>Impact</a>
+      <a href="#"><svg class="i i-lg"><use href="#i-sparkles"/></svg>Ask</a>
+    </nav>
+  </div>
+</div>
+</div>
+</div>
+<aside class="mk-notes" aria-label="Design annotations">
+  <h2>Impact results</h2>
+  <p class="sub">Makes the impact number believable, then puts it to use: share it, thank the team, follow up.</p>
+  <ol>
+    <li data-n="1"><span><b>A range, not just a number</b>Weekly lift with a likely range, the total after removing the seasonal lift, and a confidence rating explained in words.<small>Fixes: trust in impact numbers (P5)</small></span></li>
+    <li data-n="2"><span><b>Store vs comparison chart</b>Your store as a solid line, the comparison group dashed, the likely range shaded and the start clearly marked. Each line is labelled directly, there's a text description, and nothing relies on colour alone.<small>Fixes: trust in impact numbers, accessibility (P5)</small></span></li>
+    <li data-n="3"><span><b>Explained in plain words</b>One sentence a store manager could repeat to their team or district manager.<small>Fixes: black-box numbers (P5)</small></span></li>
+    <li data-n="4"><span><b>Results lead somewhere</b>Share as a best practice (it then appears on matching missions in similar stores), thank the team, or start a follow-up.<small>Fixes: best practices that don't spread (P6)</small></span></li>
+    <li data-n="5"><span><b>Bad results shown too</b>"No clear change" and "Got worse" are shown openly, each with an icon and label. This builds trust and keeps the learning.<small>Fixes: trust in impact numbers (P5)</small></span></li>
+    <li data-n="6"><span><b>"Can I trust this number?"</b>A short checklist of how fair the comparison is, including the gaps and how they were handled.<small>Fixes: trust in impact numbers, trust in the data (P5, P7)</small></span></li>
+  </ol>
+</aside>
+</div>
+<script src="mk.js"></script>
+</body>
+</html>

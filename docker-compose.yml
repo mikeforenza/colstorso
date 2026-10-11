@@ -1,0 +1,17 @@
+services:
+  colstorso:
+    build: .
+    image: colstorso:latest
+    ports: ["8000:8000"]
+    environment:
+      COLSTORSO_PUBLIC_DEMO: "1"          # demo personas only, API docs off, reset button on
+      COLSTORSO_RATE_LIMIT: "240"         # requests / minute / IP
+      COLSTORSO_WRITE_RATE_LIMIT: "60"    # writes / minute / IP
+      COLSTORSO_RESET_LIMIT: "6"          # demo resets / hour (global)
+      COLSTORSO_MAX_UPLOAD_MB: "5"
+      # COLSTORSO_LLM_URL: https://.../v1/chat/completions   # optional, answers cached
+      # COLSTORSO_LLM_KEY: ...
+    volumes: ["colstorso-data:/data"]
+    restart: unless-stopped
+volumes:
+  colstorso-data:

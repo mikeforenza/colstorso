@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Store comparison — ColsTorso (Regional manager) · Example data</title>
+<link rel="stylesheet" href="../tokens.css"><link rel="stylesheet" href="ct-components.css">
+<style>
+  .rg { display: grid; grid-template-columns: minmax(0,1fr); gap: var(--ct-space-200); }
+  @container app (min-width: 1024px) { .rg { grid-template-columns: minmax(0,1fr) 336px; gap: var(--ct-space-200); align-items: start; } }
+  .pagehead { display: flex; flex-wrap: wrap; gap: var(--ct-space-150); align-items: end; justify-content: space-between; }
+  .scope { display: flex; gap: var(--ct-space-100); flex-wrap: wrap; }
+  .select { display: inline-flex; align-items: center; gap: var(--ct-space-100); min-height: var(--ct-size-touch-target); padding: 0 var(--ct-space-150); border: 1px solid var(--ct-color-border-strong); border-radius: var(--ct-radius-md); background: var(--ct-color-surface-raised); font: var(--ct-type-label); font-size: var(--ct-font-size-100); }
+  .theme { display: grid; grid-template-columns: auto 1fr; gap: var(--ct-space-150); padding: var(--ct-space-200); border-radius: var(--ct-radius-lg); background: var(--ct-color-status-info-bg); border: 1px solid var(--ct-color-status-info-border); }
+  .theme > .i { color: var(--ct-color-status-info-fg); }
+  .theme .acts { grid-column: 2; display: flex; gap: var(--ct-space-100); flex-wrap: wrap; }
+  @container app (min-width: 1024px) { .theme { grid-template-columns: auto 1fr auto; align-items: center; } .theme .acts { grid-column: 3; } }
+  .tblwrap { overflow-x: auto; }
+  .tblbar .seg { flex: none; }
+  .tbl td, .tbl th { padding-left: 10px; padding-right: 10px; }
+  .tbl .store { min-width: 200px; }
+  .tbl .store b { display: block; font: var(--ct-type-label); font-size: var(--ct-font-size-100); }
+  .tbl .store span { font: var(--ct-type-caption); color: var(--ct-color-text-muted); }
+  .rk { display: inline-grid; flex: none; place-items: center; text-align: center; width: 28px; height: 28px; border-radius: var(--ct-radius-circle); background: var(--ct-color-surface-sunken); font: var(--ct-type-label); }
+  .rk.gold { background: var(--ct-color-marigold-100); color: var(--ct-color-marigold-900); }
+  .mini { display: inline-block; width: 64px; height: 8px; border-radius: 4px; background: var(--ct-color-surface-sunken); border: 1px solid var(--ct-color-border-default); vertical-align: middle; margin-left: 6px; overflow: hidden; }
+  .mini span { display: block; height: 100%; background: var(--ct-color-brand-primary); }
+  .tblbar { display: flex; flex-wrap: wrap; gap: var(--ct-space-150); align-items: center; justify-content: space-between; padding: var(--ct-space-150) var(--ct-space-200); border-bottom: 1px solid var(--ct-color-border-default); }
+  .drawer { display: grid; gap: var(--ct-space-200); }
+  .drawer .hd { display: flex; gap: var(--ct-space-150); align-items: start; }
+  .focus { display: grid; gap: var(--ct-space-100); }
+  .focus .f { display: grid; grid-template-columns: auto 1fr; gap: var(--ct-space-100); font: var(--ct-type-body-sm); padding: var(--ct-space-100) 0; border-top: 1px solid var(--ct-color-border-subtle); }
+  .vchk { display: flex; align-items: center; gap: var(--ct-space-050); min-height: 48px; font: var(--ct-type-body); border-top: 1px solid var(--ct-color-border-subtle); }
+  .vchk .grow { flex: 1; }
+  .scard { display: grid; gap: var(--ct-space-100); padding: var(--ct-space-150) var(--ct-space-200); border-top: 1px solid var(--ct-color-border-subtle); }
+  .scard .top { display: flex; align-items: center; gap: var(--ct-space-150); }
+  .scard .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--ct-space-100); font: var(--ct-type-body-sm); }
+  .scard .stats b { display: block; font: var(--ct-type-label); font-size: var(--ct-font-size-100); }
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-alarm-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8" />
+  <path d="M12 9v4l2 2" />
+  <path d="M5 3 2 6" />
+  <path d="m22 6-3-3" />
+  <path d="M6.38 18.7 4 21" />
+  <path d="M17.64 18.67 20 21" /></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" />
+  <path d="m12 5 7 7-7 7" /></symbol><symbol id="i-arrow-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7" />
+  <path d="M12 19V5" /></symbol><symbol id="i-badge-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+  <path d="m16 9-5.5 5.5L8 12" /></symbol><symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0" />
+  <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" /></symbol><symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v3" />
+  <path d="M16 2v3" />
+  <rect x="3" y="3" width="18" height="18" rx="2" />
+  <path d="M3 9h18" /></symbol><symbol id="i-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z" />
+  <circle cx="12" cy="13" r="3" /></symbol><symbol id="i-chart-column" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16" />
+  <path d="M18 17V9" />
+  <path d="M13 17V5" />
+  <path d="M8 17v-3" /></symbol><symbol id="i-chart-line" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16" />
+  <path d="m19 9-5 5-4-4-3 3" /></symbol><symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></symbol><symbol id="i-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></symbol><symbol id="i-circle-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" />
+  <path d="m16 9-5.5 5.5L8 12" /></symbol><symbol id="i-circle-help" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" />
+  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+  <path d="M12 17h.01" /></symbol><symbol id="i-clipboard-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+  <path d="m9 14 2 2 4-4" /></symbol><symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" />
+  <path d="M12 6v6l4 2" /></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.94 5.274A7 7 0 0 1 15.71 10h1.79a4.5 4.5 0 0 1 4.222 6.057" />
+  <path d="M18.796 18.81A4.5 4.5 0 0 1 17.5 19H9A7 7 0 0 1 5.79 5.78" />
+  <path d="m2 2 20 20" /></symbol><symbol id="i-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3" />
+  <path d="M3 5V19A9 3 0 0 0 21 19V5" />
+  <path d="M3 12A9 3 0 0 0 21 12" /></symbol><symbol id="i-ellipsis" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1" />
+  <circle cx="19" cy="12" r="1" />
+  <circle cx="5" cy="12" r="1" /></symbol><symbol id="i-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4" /></symbol><symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" />
+  <path d="M12 16v-4" />
+  <path d="M12 8h.01" /></symbol><symbol id="i-layout-dashboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1" />
+  <rect width="7" height="5" x="14" y="3" rx="1" />
+  <rect width="7" height="9" x="14" y="12" rx="1" />
+  <rect width="7" height="5" x="3" y="16" rx="1" /></symbol><symbol id="i-lightbulb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+  <path d="M9 18h6" />
+  <path d="M10 22h4" /></symbol><symbol id="i-list-checks" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 5h8" />
+  <path d="M13 12h8" />
+  <path d="M13 19h8" />
+  <path d="m3 17 2 2 4-4" />
+  <path d="m3 7 2 2 4-4" /></symbol><symbol id="i-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" /></symbol><symbol id="i-megaphone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 6a13 13 0 0 0 8.4-2.8A1 1 0 0 1 21 4v12a1 1 0 0 1-1.6.8A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" />
+  <path d="M6 14a12 12 0 0 0 2.4 7.2 2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14" />
+  <path d="M8 6v8" /></symbol><symbol id="i-message-square" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /></symbol><symbol id="i-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19v3" />
+  <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+  <rect x="9" y="2" width="6" height="13" rx="3" /></symbol><symbol id="i-minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /></symbol><symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" />
+  <path d="M12 5v14" /></symbol><symbol id="i-scan-barcode" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2" />
+  <path d="M17 3h2a2 2 0 0 1 2 2v2" />
+  <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
+  <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
+  <path d="M8 7v10" />
+  <path d="M12 7v10" />
+  <path d="M17 7v10" /></symbol><symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34" />
+  <circle cx="11" cy="11" r="8" /></symbol><symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" />
+  <path d="m21.854 2.147-10.94 10.939" /></symbol><symbol id="i-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
+  <circle cx="12" cy="12" r="3" /></symbol><symbol id="i-shield-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+  <path d="m9 12 2 2 4-4" /></symbol><symbol id="i-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
+  <path d="M20 2v4" />
+  <path d="M22 4h-4" />
+  <circle cx="4" cy="20" r="2" /></symbol><symbol id="i-store" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5" />
+  <path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244" />
+  <path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05" /></symbol><symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4" />
+  <path d="M12 2v2" />
+  <path d="M12 20v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="m17.66 17.66 1.41 1.41" />
+  <path d="M2 12h2" />
+  <path d="M20 12h2" />
+  <path d="m6.34 17.66-1.41 1.41" />
+  <path d="m19.07 4.93-1.41 1.41" /></symbol><symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" />
+  <circle cx="12" cy="12" r="6" />
+  <circle cx="12" cy="12" r="2" /></symbol><symbol id="i-thumbs-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z" />
+  <path d="M7 10v12" /></symbol><symbol id="i-trending-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 17h6v-6" />
+  <path d="m22 17-8.5-8.5-5 5L2 7" /></symbol><symbol id="i-trending-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 7h6v6" />
+  <path d="m22 7-8.5 8.5-5-5L2 17" /></symbol><symbol id="i-triangle-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+  <path d="M12 9v4" />
+  <path d="M12 17h.01" /></symbol><symbol id="i-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14.66V17a1 1 0 0 1-1 1 2 2 0 0 0-2 2v2" />
+  <path d="M14 14.66V17a1 1 0 0 0 1 1 2 2 0 0 1 2 2v2" />
+  <path d="M17.916 10H19.5A2.5 2.5 0 0 0 22 7.5V5a1 1 0 0 0-1-1h-3" />
+  <path d="M4 22h16" />
+  <path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z" />
+  <path d="M6.084 10H4.5A2.5 2.5 0 0 1 2 7.5V5a1 1 0 0 1 1-1h3" /></symbol><symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+  <circle cx="12" cy="7" r="4" /></symbol><symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+  <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+  <circle cx="9" cy="7" r="4" /></symbol><symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18" />
+  <path d="m6 6 12 12" /></symbol></svg>
+<div class="mk-stage">
+<div class="mk-frame">
+<div class="mk-example">Example data · Harbor &amp; Pine Market (fictional)</div>
+<div class="ct-app">
+<div class="shell">
+  <nav class="sidenav" aria-label="Main">
+    <div class="brand"><img src="../logo.svg" alt="ColsTorso"></div>
+    <a href="#"><svg class="i"><use href="#i-sun"/></svg>Today</a>
+    <a href="#" aria-current="page"><svg class="i"><use href="#i-store"/></svg>My stores</a>
+    <a href="#"><svg class="i"><use href="#i-map-pin"/></svg>Visits<span class="count">3</span></a>
+    <a href="#"><svg class="i"><use href="#i-target"/></svg>Plans to review<span class="count">6</span></a>
+    <a href="#"><svg class="i"><use href="#i-chart-line"/></svg>Impact</a>
+    <a href="#"><svg class="i"><use href="#i-lightbulb"/></svg>Best practices</a>
+    <a href="#"><svg class="i"><use href="#i-sparkles"/></svg>Ask ColsTorso</a>
+    <div class="foot"><a href="#"><svg class="i"><use href="#i-settings"/></svg>Settings</a></div>
+  </nav>
+  <div class="main">
+    <header class="topbar">
+      <img class="logo" src="../logo-mark.svg" alt="ColsTorso">
+      <div class="ctx"><b>North region · 26 stores</b><span>Avery Lindqvist · Regional manager · Week 41</span></div>
+      <button class="iconbtn" aria-label="Search stores"><svg class="i"><use href="#i-search"/></svg></button>
+      <button class="iconbtn" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg></button>
+      <span class="avatar" role="img" aria-label="Avery Lindqvist">AL</span>
+    </header>
+    <div class="fresh" role="status" data-note="7">
+      <span class="src ok"><svg class="i i-sm"><use href="#i-circle-check"/></svg>Sales, waste, tasks: through Sun 11 Oct</span>
+      <span class="src stale"><svg class="i i-sm"><use href="#i-triangle-alert"/></svg>Labor missing for 2 stores (S031, S040)</span>
+      <span class="muted">Updated 5:10 AM</span>
+    </div>
+    <main class="content">
+      <div class="pagehead">
+        <div><h1 class="h1">Store comparison</h1><p class="lede">Who's improving, who needs help, and where to go this week.</p></div>
+        <div class="scope"><span class="select">All 3 districts<svg class="i i-sm"><use href="#i-chevron-down"/></svg></span><span class="select">Last 4 weeks<svg class="i i-sm"><use href="#i-chevron-down"/></svg></span></div>
+      </div>
+      <div class="kpis" data-note="1">
+        <div class="card kpi"><span class="k">Missions accepted</span><span class="v num">74%</span><span class="d imp-pos"><svg class="i i-sm"><use href="#i-trending-up"/></svg>+6 pts vs last month</span></div>
+        <div class="card kpi"><span class="k">Measured impact</span><span class="v num">+$38.4k<small style="font-size:var(--ct-font-size-100)">/wk</small></span><span class="d sec">Compared with similar stores</span></div>
+        <div class="card kpi"><span class="k">Plans to review</span><span class="v num">6</span><span class="d imp-neg"><svg class="i i-sm"><use href="#i-clock"/></svg>2 waiting &gt; 3 days</span></div>
+        <div class="card kpi"><span class="k">Overdue tasks</span><span class="v num">17</span><span class="d imp-neg"><svg class="i i-sm"><use href="#i-trending-up"/></svg>11 in 2 stores</span></div>
+      </div>
+      <div class="theme" role="note" data-note="2">
+        <svg class="i i-lg"><use href="#i-lightbulb"/></svg>
+        <div><b>Pattern across stores: Bakery waste is up in 5 Lakes stores.</b><br><span style="font:var(--ct-type-body-sm)">3 managers gave the same reason: "Thursday delivery moved to 6 AM". It probably can't be fixed in store.</span></div>
+        <div class="acts"><button class="btn btn-primary"><svg class="i"><use href="#i-send"/></svg>Raise with Supply</button><button class="btn btn-secondary">See 5 stores</button></div>
+      </div>
+
+      <div class="rg">
+        <section class="card" aria-labelledby="lb-h">
+          <div class="tblbar">
+            <h2 id="lb-h" class="h3">Leaderboard</h2>
+            <div class="seg" role="group" aria-label="Rank stores by" data-note="3">
+              <button aria-pressed="true">Improvement</button><button aria-pressed="false">Impact $</button><button aria-pressed="false">Vs plan</button>
+            </div>
+          </div>
+          <div class="tblwrap desktop-only">
+          <table class="tbl" data-note="4">
+            <thead><tr><th>#</th><th>Store</th><th class="r">Improvement ▾</th><th class="r">$/wk</th><th class="r">Accepted</th><th class="r">Overdue</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td><span class="rk gold">1</span></td><td class="store"><b>S009 Oak Hill Express</b><span>Riley Silva · Valley · visited 2 Oct</span></td><td class="r imp-pos">+9.4%</td><td class="r">+$4.1k</td><td class="r">8 of 9</td><td class="r">0</td><td><span class="chip s-success"><svg class="i"><use href="#i-trophy"/></svg>Top</span></td></tr>
+              <tr><td><span class="rk gold">2</span></td><td class="store"><b>S014 Lakeview Standard</b><span>Jordan Okafor · Lakes · visited 25 Sep</span></td><td class="r imp-pos">+6.1%</td><td class="r">+$3.2k</td><td class="r">6 of 8</td><td class="r">1</td><td><span class="chip s-neutral"><svg class="i"><use href="#i-circle-check"/></svg>OK</span></td></tr>
+              <tr><td><span class="rk gold">3</span></td><td class="store"><b>S027 Riverside Superstore</b><span>Casey Novak · Metro North · visited 30 Sep</span></td><td class="r imp-pos">+4.8%</td><td class="r">+$6.9k</td><td class="r">7 of 9</td><td class="r">2</td><td><span class="chip s-neutral"><svg class="i"><use href="#i-circle-check"/></svg>OK</span></td></tr>
+              <tr><td><span class="rk">4</span></td><td class="store"><b>S033 Fairview Standard</b><span>Peyton Ito · Lakes · visited 18 Sep</span></td><td class="r imp-pos">+2.2%</td><td class="r">+$1.4k</td><td class="r">4 of 7</td><td class="r">0</td><td><span class="chip s-neutral"><svg class="i"><use href="#i-circle-check"/></svg>OK</span></td></tr>
+              <tr><td><span class="rk">5</span></td><td class="store"><b>S040 Brookfield Superstore</b><span>Toby Kim · Valley · visited 9 Sep</span></td><td class="r imp-neu">+0.3%</td><td class="r">+$0.4k</td><td class="r">3 of 8</td><td class="r">3</td><td><span class="chip s-warning"><svg class="i"><use href="#i-database"/></svg>Data gap</span></td></tr>
+              <tr class="sel" aria-selected="true"><td><span class="rk">6</span></td><td class="store"><b>S022 Cedar Falls Express</b><span>Morgan Haddad · Lakes · visited 21 Aug</span></td><td class="r imp-neg">−3.7%</td><td class="r">−$0.9k</td><td class="r">1 of 7</td><td class="r">8</td><td><span class="chip s-danger"><svg class="i"><use href="#i-triangle-alert"/></svg>Visit</span></td></tr>
+              <tr><td><span class="rk">7</span></td><td class="store"><b>S031 Westport Standard</b><span>Quinn Abara · Metro North · visited 12 Sep</span></td><td class="r imp-neg">−4.2%</td><td class="r">−$1.6k</td><td class="r">2 of 8</td><td class="r">3</td><td><span class="chip s-danger"><svg class="i"><use href="#i-triangle-alert"/></svg>Visit</span></td></tr>
+            </tbody>
+          </table>
+          </div>
+          <div class="mobile-only">
+            <div class="scard"><div class="top"><span class="rk gold">1</span><div class="grow" style="flex:1"><b>S009 Oak Hill Express</b><br><span class="muted" style="font:var(--ct-type-caption)">Riley Silva · Valley</span></div><span class="chip s-success"><svg class="i"><use href="#i-trophy"/></svg>Recognise</span></div>
+              <div class="stats"><span>Improvement<b class="imp-pos">+9.4%</b></span><span>Impact/wk<b>+$4.1k</b></span><span>Overdue<b>0</b></span></div></div>
+            <div class="scard"><div class="top"><span class="rk gold">2</span><div style="flex:1"><b>S014 Lakeview Standard</b><br><span class="muted" style="font:var(--ct-type-caption)">Jordan Okafor · Lakes</span></div><span class="chip s-neutral"><svg class="i"><use href="#i-circle-check"/></svg>On track</span></div>
+              <div class="stats"><span>Improvement<b class="imp-pos">+6.1%</b></span><span>Impact/wk<b>+$3.2k</b></span><span>Overdue<b>1</b></span></div></div>
+            <div class="scard" style="background:var(--ct-color-surface-selected)"><div class="top"><span class="rk">6</span><div style="flex:1"><b>S022 Cedar Falls Express</b><br><span class="muted" style="font:var(--ct-type-caption)">Morgan Haddad · Lakes</span></div><span class="chip s-danger"><svg class="i"><use href="#i-triangle-alert"/></svg>Visit</span></div>
+              <div class="stats"><span>Improvement<b class="imp-neg">−3.7%</b></span><span>Impact/wk<b>−$0.9k</b></span><span>Overdue<b>8</b></span></div></div>
+            <a class="row" href="#" style="text-decoration:none;color:inherit"><span class="grow t">See all 26 stores</span><svg class="i muted"><use href="#i-chevron-right"/></svg></a>
+          </div>
+        </section>
+
+        <aside class="card card-pad drawer" aria-label="Selected store: S022 Cedar Falls Express" data-note="5">
+          <div class="hd"><span class="avatar">MH</span><div style="flex:1"><h2 class="h4">S022 Cedar Falls Express</h2><p class="muted" style="font:var(--ct-type-body-sm)">Morgan Haddad · manager for 7 months</p></div></div>
+          <div class="focus">
+            <span class="eyebrow">What to focus on during the visit</span>
+            <div class="f"><svg class="i imp-neg"><use href="#i-list-checks"/></svg><span><b>8 overdue tasks</b>: 5 are HQ planogram checks from 3 weeks ago</span></div>
+            <div class="f"><svg class="i imp-neg"><use href="#i-target"/></svg><span><b>Only 1 of 7 missions accepted</b>: 4 were snoozed twice</span></div>
+            <div class="f"><svg class="i imp-pos"><use href="#i-trending-up"/></svg><span><b>Doing well:</b> customer score up 3 points in 4 weeks</span></div>
+          </div>
+          <div data-note="6">
+            <span class="eyebrow">Visit checklist · Thu 15 Oct</span>
+            <div class="vchk"><button class="check" role="checkbox" aria-checked="true" aria-label="Review snoozed missions with Morgan"><span><svg class="i i-sm"><use href="#i-check"/></svg></span></button><span class="grow">Go through snoozed missions with Morgan</span></div>
+            <div class="vchk"><button class="check" role="checkbox" aria-checked="false" aria-label="Walk Fresh and Bakery"><span></span></button><span class="grow">Walk Fresh &amp; Bakery (take a photo)</span><svg class="i muted"><use href="#i-camera"/></svg></div>
+            <div class="vchk"><button class="check" role="checkbox" aria-checked="false" aria-label="Agree 2 actions"><span></span></button><span class="grow">Agree 2 actions, which become missions</span></div>
+            <div class="vchk"><button class="check" role="checkbox" aria-checked="false" aria-label="Give coaching note"><span></span></button><span class="grow">Leave a coaching note</span><svg class="i muted"><use href="#i-mic"/></svg></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--ct-space-100)"><button class="btn btn-secondary">Message</button><button class="btn btn-primary"><svg class="i"><use href="#i-map-pin"/></svg>Start visit</button></div>
+        </aside>
+      </div>
+    </main>
+    <nav class="tabbar" aria-label="Main">
+      <a href="#"><svg class="i i-lg"><use href="#i-sun"/></svg>Today</a>
+      <a href="#" aria-current="page"><svg class="i i-lg"><use href="#i-store"/></svg>Stores</a>
+      <a href="#"><svg class="i i-lg"><use href="#i-map-pin"/></svg>Visits</a>
+      <a href="#"><svg class="i i-lg"><use href="#i-target"/></svg>Review<span class="badge">6</span></a>
+      <a href="#"><svg class="i i-lg"><use href="#i-sparkles"/></svg>Ask</a>
+    </nav>
+  </div>
+</div>
+</div>
+</div>
+<aside class="mk-notes" aria-label="Design annotations">
+  <h2>Regional manager · store comparison</h2>
+  <p class="sub">Answers three questions: who's improving, who needs help, and what to do on the next visit.</p>
+  <ol>
+    <li data-n="1"><span><b>Four numbers that matter</b>Accept rate, impact measured against similar stores, plans waiting for review and overdue tasks, each with a trend shown in words and an arrow.<small>Fixes: too many reports for field leaders (P1)</small></span></li>
+    <li data-n="2"><span><b>Patterns go up the chain</b>When several managers reject or snooze missions for the same reason, it becomes a pattern with a one-click hand-off to HQ or Supply. Store feedback finally gets back to head office.<small>Fixes: the gap between HQ and stores (P6)</small></span></li>
+    <li data-n="3"><span><b>Rank by improvement first</b>The default ranking is improvement against each store's own expected level. That recognises the best managers, not just the managers of the biggest stores. Ranking by raw $ or sales vs plan is one tap away.<small>Fixes: fairness worries, impact trust (P5)</small></span></li>
+    <li data-n="4"><span><b>Status as words and icons</b>"Visit" and "Data gap" are labelled chips with icons, never just a red cell. Numbers line up for easy scanning, and data gaps are shown openly instead of quietly lowering a score.<small>Fixes: meaning by colour alone, trust in the data (P5)</small></span></li>
+    <li data-n="5"><span><b>Visit focus picked for you</b>Selecting a store opens a short, data-based agenda with one thing to praise, so coaching stays balanced.<small>Fixes: unfocused store visits (P6)</small></span></li>
+    <li data-n="6"><span><b>A visit checklist that creates work</b>Agreed actions become missions with impact tracking, and photo and voice notes need no typing. It works offline in the store.<small>Fixes: visits that aren't followed up, slow data entry (P3, P6)</small></span></li>
+    <li data-n="7"><span><b>Missing data called out by store</b>Missing data is named by store, so a weak score isn't blamed on the manager.<small>Fixes: trust in the data (P5, P7)</small></span></li>
+  </ol>
+</aside>
+</div>
+<script src="mk.js"></script>
+</body>
+</html>

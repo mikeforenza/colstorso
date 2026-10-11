@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HQ dashboard &amp; campaigns — ColsTorso · Example data</title>
+<link rel="stylesheet" href="../tokens.css"><link rel="stylesheet" href="ct-components.css">
+<style>
+  .hq { display: grid; grid-template-columns: minmax(0,1fr); gap: var(--ct-space-200); }
+  @container app (min-width: 1024px) { .hq { grid-template-columns: minmax(0,1fr) 380px; gap: var(--ct-space-300); align-items: start; } }
+  .pagehead { display: flex; flex-wrap: wrap; gap: var(--ct-space-150); align-items: end; justify-content: space-between; }
+  .stepper { display: flex; gap: var(--ct-space-100); flex-wrap: wrap; margin: var(--ct-space-150) 0 var(--ct-space-200); counter-reset: s; }
+  .stepper li { list-style: none; display: inline-flex; align-items: center; gap: var(--ct-space-100); font: var(--ct-type-label); color: var(--ct-color-text-secondary); padding-right: var(--ct-space-150); }
+  .stepper li .n { width: 28px; height: 28px; border-radius: var(--ct-radius-circle); display: grid; place-items: center; border: 2px solid var(--ct-color-border-strong); font: var(--ct-type-caption); font-weight: 700; }
+  .stepper li.done .n { background: var(--ct-color-status-success-solid); border-color: var(--ct-color-status-success-solid); color: var(--ct-color-text-inverse); }
+  .stepper li[aria-current="step"] { color: var(--ct-color-text-primary); }
+  .stepper li[aria-current="step"] .n { background: var(--ct-color-brand-primary); border-color: var(--ct-color-brand-primary); color: var(--ct-color-text-on-brand); }
+  .stepper { padding: 0; }
+  .bgrid { display: grid; grid-template-columns: minmax(0,1fr); gap: var(--ct-space-300); }
+  @container app (min-width: 1024px) { .bgrid { grid-template-columns: minmax(0,1fr) 280px; } }
+  .fld { display: grid; gap: var(--ct-space-100); margin-bottom: var(--ct-space-250); }
+  .fld > label, .fld > .lbl { font: var(--ct-type-label); font-size: var(--ct-font-size-100); }
+  .fld .hint { font: var(--ct-type-body-sm); color: var(--ct-color-text-secondary); }
+  .tokens { display: flex; flex-wrap: wrap; gap: var(--ct-space-100); }
+  .tok { display: inline-flex; align-items: center; gap: var(--ct-space-075); min-height: 36px; padding: 0 var(--ct-space-100) 0 var(--ct-space-150); border-radius: var(--ct-radius-pill); background: var(--ct-color-surface-selected); border: 1px solid var(--ct-color-border-brand); font: var(--ct-type-label); color: var(--ct-color-text-brand); }
+  .tok.ex { background: var(--ct-color-surface-sunken); border-color: var(--ct-color-border-strong); color: var(--ct-color-text-secondary); }
+  .tok .i { width: 16px; height: 16px; }
+  .addtok { min-height: 36px; padding: 0 var(--ct-space-150); border-radius: var(--ct-radius-pill); border: 1px dashed var(--ct-color-border-strong); background: transparent; font: var(--ct-type-label); color: var(--ct-color-text-secondary); }
+  .count { display: flex; gap: var(--ct-space-200); align-items: baseline; padding: var(--ct-space-150) var(--ct-space-200); background: var(--ct-color-surface-sunken); border-radius: var(--ct-radius-md); }
+  .count b { font: var(--ct-type-metric-sm); }
+  .budget { display: grid; grid-template-columns: auto 1fr; gap: var(--ct-space-150); padding: var(--ct-space-200); border-radius: var(--ct-radius-lg); background: var(--ct-color-status-warning-bg); border: 1px solid var(--ct-color-status-warning-border); }
+  .budget > .i { color: var(--ct-color-status-warning-fg); }
+  .budget .acts { display: flex; gap: var(--ct-space-100); margin-top: var(--ct-space-100); flex-wrap: wrap; }
+  .ctrl { display: grid; grid-template-columns: auto 1fr; gap: var(--ct-space-150); padding: var(--ct-space-200); border-radius: var(--ct-radius-lg); background: var(--ct-color-status-info-bg); border: 1px solid var(--ct-color-status-info-border); margin-top: var(--ct-space-150); }
+  .ctrl > .i { color: var(--ct-color-status-info-fg); }
+  .phone { border: 8px solid var(--ct-color-slate-900); border-radius: 28px; padding: var(--ct-space-100); background: var(--ct-color-surface-canvas); }
+  .phone .mission { padding: var(--ct-space-150); gap: var(--ct-space-100); }
+  .phone .mission h3 { font-size: var(--ct-font-size-100); }
+  .phone .why { font-size: var(--ct-font-size-087); }
+  .camp { display: grid; gap: var(--ct-space-075); padding: var(--ct-space-150) var(--ct-space-200); border-top: 1px solid var(--ct-color-border-subtle); }
+  .camp .t { display: flex; justify-content: space-between; gap: var(--ct-space-100); font: var(--ct-type-label); font-size: var(--ct-font-size-100); }
+  .camp .s { display: flex; justify-content: space-between; gap: var(--ct-space-100); font: var(--ct-type-body-sm); color: var(--ct-color-text-secondary); }
+  .fb .r { display: grid; grid-template-columns: 1fr auto; gap: var(--ct-space-100); align-items: center; padding: var(--ct-space-100) var(--ct-space-200); border-top: 1px solid var(--ct-color-border-subtle); font: var(--ct-type-body-sm); }
+  .fb .bar { grid-column: 1 / -1; height: 6px; }
+  .footer-acts { display: flex; justify-content: space-between; gap: var(--ct-space-100); padding-top: var(--ct-space-200); border-top: 1px solid var(--ct-color-border-subtle); flex-wrap: wrap; }
+  .slider { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-alarm-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8" />
+  <path d="M12 9v4l2 2" />
+  <path d="M5 3 2 6" />
+  <path d="m22 6-3-3" />
+  <path d="M6.38 18.7 4 21" />
+  <path d="M17.64 18.67 20 21" /></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" />
+  <path d="m12 5 7 7-7 7" /></symbol><symbol id="i-arrow-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7" />
+  <path d="M12 19V5" /></symbol><symbol id="i-badge-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+  <path d="m16 9-5.5 5.5L8 12" /></symbol><symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0" />
+  <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" /></symbol><symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v3" />
+  <path d="M16 2v3" />
+  <rect x="3" y="3" width="18" height="18" rx="2" />
+  <path d="M3 9h18" /></symbol><symbol id="i-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z" />
+  <circle cx="12" cy="13" r="3" /></symbol><symbol id="i-chart-column" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16" />
+  <path d="M18 17V9" />
+  <path d="M13 17V5" />
+  <path d="M8 17v-3" /></symbol><symbol id="i-chart-line" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16" />
+  <path d="m19 9-5 5-4-4-3 3" /></symbol><symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></symbol><symbol id="i-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></symbol><symbol id="i-circle-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" />
+  <path d="m16 9-5.5 5.5L8 12" /></symbol><symbol id="i-circle-help" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" />
+  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+  <path d="M12 17h.01" /></symbol><symbol id="i-clipboard-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+  <path d="m9 14 2 2 4-4" /></symbol><symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" />
+  <path d="M12 6v6l4 2" /></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.94 5.274A7 7 0 0 1 15.71 10h1.79a4.5 4.5 0 0 1 4.222 6.057" />
+  <path d="M18.796 18.81A4.5 4.5 0 0 1 17.5 19H9A7 7 0 0 1 5.79 5.78" />
+  <path d="m2 2 20 20" /></symbol><symbol id="i-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3" />
+  <path d="M3 5V19A9 3 0 0 0 21 19V5" />
+  <path d="M3 12A9 3 0 0 0 21 12" /></symbol><symbol id="i-ellipsis" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1" />
+  <circle cx="19" cy="12" r="1" />
+  <circle cx="5" cy="12" r="1" /></symbol><symbol id="i-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4" /></symbol><symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" />
+  <path d="M12 16v-4" />
+  <path d="M12 8h.01" /></symbol><symbol id="i-layout-dashboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1" />
+  <rect width="7" height="5" x="14" y="3" rx="1" />
+  <rect width="7" height="9" x="14" y="12" rx="1" />
+  <rect width="7" height="5" x="3" y="16" rx="1" /></symbol><symbol id="i-lightbulb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+  <path d="M9 18h6" />
+  <path d="M10 22h4" /></symbol><symbol id="i-list-checks" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 5h8" />
+  <path d="M13 12h8" />
+  <path d="M13 19h8" />
+  <path d="m3 17 2 2 4-4" />
+  <path d="m3 7 2 2 4-4" /></symbol><symbol id="i-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" /></symbol><symbol id="i-megaphone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 6a13 13 0 0 0 8.4-2.8A1 1 0 0 1 21 4v12a1 1 0 0 1-1.6.8A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" />
+  <path d="M6 14a12 12 0 0 0 2.4 7.2 2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14" />
+  <path d="M8 6v8" /></symbol><symbol id="i-message-square" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /></symbol><symbol id="i-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19v3" />
+  <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+  <rect x="9" y="2" width="6" height="13" rx="3" /></symbol><symbol id="i-minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /></symbol><symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" />
+  <path d="M12 5v14" /></symbol><symbol id="i-scan-barcode" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2" />
+  <path d="M17 3h2a2 2 0 0 1 2 2v2" />
+  <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
+  <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
+  <path d="M8 7v10" />
+  <path d="M12 7v10" />
+  <path d="M17 7v10" /></symbol><symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34" />
+  <circle cx="11" cy="11" r="8" /></symbol><symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" />
+  <path d="m21.854 2.147-10.94 10.939" /></symbol><symbol id="i-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
+  <circle cx="12" cy="12" r="3" /></symbol><symbol id="i-shield-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+  <path d="m9 12 2 2 4-4" /></symbol><symbol id="i-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
+  <path d="M20 2v4" />
+  <path d="M22 4h-4" />
+  <circle cx="4" cy="20" r="2" /></symbol><symbol id="i-store" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5" />
+  <path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244" />
+  <path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05" /></symbol><symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4" />
+  <path d="M12 2v2" />
+  <path d="M12 20v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="m17.66 17.66 1.41 1.41" />
+  <path d="M2 12h2" />
+  <path d="M20 12h2" />
+  <path d="m6.34 17.66-1.41 1.41" />
+  <path d="m19.07 4.93-1.41 1.41" /></symbol><symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" />
+  <circle cx="12" cy="12" r="6" />
+  <circle cx="12" cy="12" r="2" /></symbol><symbol id="i-thumbs-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z" />
+  <path d="M7 10v12" /></symbol><symbol id="i-trending-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 17h6v-6" />
+  <path d="m22 17-8.5-8.5-5 5L2 7" /></symbol><symbol id="i-trending-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 7h6v6" />
+  <path d="m22 7-8.5 8.5-5-5L2 17" /></symbol><symbol id="i-triangle-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+  <path d="M12 9v4" />
+  <path d="M12 17h.01" /></symbol><symbol id="i-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14.66V17a1 1 0 0 1-1 1 2 2 0 0 0-2 2v2" />
+  <path d="M14 14.66V17a1 1 0 0 0 1 1 2 2 0 0 1 2 2v2" />
+  <path d="M17.916 10H19.5A2.5 2.5 0 0 0 22 7.5V5a1 1 0 0 0-1-1h-3" />
+  <path d="M4 22h16" />
+  <path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z" />
+  <path d="M6.084 10H4.5A2.5 2.5 0 0 1 2 7.5V5a1 1 0 0 1 1-1h3" /></symbol><symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+  <circle cx="12" cy="7" r="4" /></symbol><symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+  <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+  <circle cx="9" cy="7" r="4" /></symbol><symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18" />
+  <path d="m6 6 12 12" /></symbol></svg>
+<div class="mk-stage">
+<div class="mk-frame">
+<div class="mk-example">Example data · Harbor &amp; Pine Market (fictional)</div>
+<div class="ct-app">
+<div class="shell">
+  <nav class="sidenav" aria-label="Main">
+    <div class="brand"><img src="../logo.svg" alt="ColsTorso"></div>
+    <a href="#"><svg class="i"><use href="#i-layout-dashboard"/></svg>Overview</a>
+    <a href="#" aria-current="page"><svg class="i"><use href="#i-megaphone"/></svg>Campaigns<span class="count">3</span></a>
+    <a href="#"><svg class="i"><use href="#i-target"/></svg>Mission rules</a>
+    <a href="#"><svg class="i"><use href="#i-list-checks"/></svg>Tasks &amp; storewalks</a>
+    <a href="#"><svg class="i"><use href="#i-message-square"/></svg>Store feedback<span class="count">38</span></a>
+    <a href="#"><svg class="i"><use href="#i-chart-line"/></svg>Impact</a>
+    <a href="#"><svg class="i"><use href="#i-lightbulb"/></svg>Best practices</a>
+    <div class="group">Admin</div>
+    <a href="#"><svg class="i"><use href="#i-database"/></svg>Data &amp; uploads</a>
+    <a href="#"><svg class="i"><use href="#i-users"/></svg>People &amp; stores</a>
+    <div class="foot"><a href="#"><svg class="i"><use href="#i-settings"/></svg>Settings</a></div>
+  </nav>
+  <div class="main">
+    <header class="topbar">
+      <img class="logo" src="../logo-mark.svg" alt="ColsTorso">
+      <div class="ctx"><b>HQ · All 50 stores</b><span>Robin Ashby · Store operations · Week 41</span></div>
+      <button class="iconbtn" aria-label="Search"><svg class="i"><use href="#i-search"/></svg></button>
+      <span class="avatar" role="img" aria-label="Robin Ashby">RA</span>
+    </header>
+    <div class="fresh" role="status">
+      <span class="src ok"><svg class="i i-sm"><use href="#i-circle-check"/></svg>All 6 data feeds current · last load 5:10 AM</span>
+      <span class="src aging"><svg class="i i-sm"><use href="#i-clock"/></svg>Labor: 2 stores late</span>
+    </div>
+    <main class="content">
+      <div class="pagehead"><div><h1 class="h1">Campaigns</h1><p class="lede">Point every store at what matters this season, without flooding them.</p></div>
+        <button class="btn btn-primary"><svg class="i"><use href="#i-plus"/></svg>New campaign</button></div>
+      <div class="kpis" data-note="1">
+        <div class="card kpi"><span class="k">Measured impact, network</span><span class="v num">+$182k<small style="font-size:var(--ct-font-size-100)">/wk</small></span><span class="d sec">Compared with stores not doing it</span></div>
+        <div class="card kpi"><span class="k">Missions accepted</span><span class="v num">71%</span><span class="d imp-pos"><svg class="i i-sm"><use href="#i-trending-up"/></svg>+4 pts in 4 weeks</span></div>
+        <div class="card kpi"><span class="k">Missions per store per day</span><span class="v num">2.6<small style="font-size:var(--ct-font-size-100)"> / 3 max</small></span><span class="d sec"><svg class="i i-sm"><use href="#i-shield-check"/></svg>Within the daily limit</span></div>
+        <div class="card kpi"><span class="k">Store feedback this week</span><span class="v num">38</span><span class="d imp-neg"><svg class="i i-sm"><use href="#i-message-square"/></svg>14 say "stock not delivered"</span></div>
+      </div>
+
+      <div class="hq">
+        <section class="card card-pad" aria-labelledby="cb-h">
+          <span class="eyebrow">New campaign · draft saved 2 min ago</span>
+          <h2 id="cb-h" class="h2" style="margin-top:4px">Holiday Baking Push</h2>
+          <ol class="stepper" aria-label="Campaign steps" data-note="2">
+            <li class="done"><span class="n"><svg class="i i-sm"><use href="#i-check"/></svg></span>Goal &amp; KPI</li>
+            <li aria-current="step"><span class="n">2</span>Stores</li>
+            <li><span class="n">3</span>Message &amp; tasks</li>
+            <li><span class="n">4</span>Review &amp; launch</li>
+          </ol>
+          <div class="bgrid">
+            <div>
+              <div class="fld" data-note="3">
+                <span class="lbl">Which stores?</span>
+                <div class="tokens">
+                  <span class="tok">Format: Standard, Superstore <svg class="i"><use href="#i-x"/></svg></span>
+                  <span class="tok">Has Bakery <svg class="i"><use href="#i-x"/></svg></span>
+                  <span class="tok ex">Except: stores in refit blackout <svg class="i"><use href="#i-x"/></svg></span>
+                  <button class="addtok">+ Add rule</button>
+                </div>
+                <div class="count"><b class="num">34</b><span>stores match · 4 regions · <a href="#">see list</a></span></div>
+              </div>
+              <div class="fld">
+                <span class="lbl">How hard should it push?</span>
+                <div class="seg" role="group" aria-label="Priority boost"><button aria-pressed="false">Gentle</button><button aria-pressed="true">Standard</button><button aria-pressed="false">Must-do</button></div>
+                <span class="hint">Standard: competes fairly with each store's own missions. Must-do skips the queue and should be rare.</span>
+              </div>
+              <div class="budget" role="status" data-note="4">
+                <svg class="i i-lg"><use href="#i-triangle-alert"/></svg>
+                <div><b>Mission budget check</b><br><span style="font:var(--ct-type-body-sm)">Adds about <b>0.5 missions per store per week</b>. 6 stores are already at their 3-a-day limit, so their lowest-value mission would move to the backlog.</span>
+                  <div class="acts"><button class="btn btn-secondary">See the 6 stores</button><button class="btn btn-ghost">Start them a week later</button></div></div>
+              </div>
+              <div class="ctrl" data-note="5">
+                <svg class="i i-lg"><use href="#i-shield-check"/></svg>
+                <div><b>How we'll measure it</b><br><span style="font:var(--ct-type-body-sm)">We'll hold back <b>8 similar stores</b> as a comparison group, picked at random. Results will be reported against them, so the season's natural lift isn't counted as campaign impact.</span></div>
+              </div>
+            </div>
+            <div data-note="6">
+              <span class="eyebrow">What a store manager will see</span>
+              <div class="phone" style="margin-top:var(--ct-space-100)">
+                <article class="card mission should">
+                  <div class="meta"><span class="chip p-should"><svg class="i"><use href="#i-arrow-up"/></svg>Should</span><span class="chip kind"><svg class="i"><use href="#i-megaphone"/></svg>HQ campaign</span></div>
+                  <h3>Bakery holiday range is selling below its space</h3>
+                  <div class="why"><span class="lbl">Why you're seeing this</span><span>Part of HQ's <b>Holiday Baking Push</b>. You're 14% below similar stores.</span></div>
+                  <div class="btn-row" style="grid-template-columns:1fr 1fr"><button class="btn btn-primary">Accept</button><button class="btn btn-secondary">Snooze</button></div>
+                </article>
+              </div>
+              <p class="muted" style="font:var(--ct-type-caption);margin-top:var(--ct-space-100)">The "why" is written per store using its own numbers.</p>
+            </div>
+          </div>
+          <div class="footer-acts"><button class="btn btn-secondary">Back</button><button class="btn btn-primary">Next: Message &amp; tasks<svg class="i"><use href="#i-arrow-right"/></svg></button></div>
+        </section>
+
+        <div style="display:grid;gap:var(--ct-space-200)">
+          <section class="card" aria-labelledby="ac-h">
+            <div class="card-pad" style="padding-bottom:var(--ct-space-100)"><h2 id="ac-h" class="h4">Running now</h2></div>
+            <div class="camp"><div class="t"><span>Fall Snack Push</span><span class="imp-pos num">+$12.4k/wk</span></div>
+              <div class="bar ok" role="progressbar" aria-label="Week 2 of 6" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"><span style="width:33%"></span></div>
+              <div class="s"><span>41 stores · 63% accepted</span><span>Week 2 of 6</span></div></div>
+            <div class="camp"><div class="t"><span>Hot Drinks Bar uptime</span><span class="imp-neu num">Too early</span></div>
+              <div class="bar" role="progressbar" aria-label="Week 1 of 4" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span style="width:25%"></span></div>
+              <div class="s"><span>50 stores · 88% accepted</span><span>Week 1 of 4</span></div></div>
+          </section>
+          <section class="card fb" aria-labelledby="fb-h" data-note="7">
+            <div class="card-pad" style="padding-bottom:var(--ct-space-100)"><h2 id="fb-h" class="h4">What stores are telling you</h2><p class="muted" style="font:var(--ct-type-body-sm)">Reasons given when a mission was turned down, this week</p></div>
+            <div class="r"><span>"Stock not delivered"</span><b class="num">14</b><div class="bar"><span style="width:100%;background:var(--ct-color-chart-4)"></span></div></div>
+            <div class="r"><span>"Fixture or display missing"</span><b class="num">9</b><div class="bar"><span style="width:64%;background:var(--ct-color-chart-4)"></span></div></div>
+            <div class="r"><span>"Already fixed"</span><b class="num">8</b><div class="bar"><span style="width:57%;background:var(--ct-color-chart-5)"></span></div></div>
+            <div class="r"><span>"Not enough staff hours"</span><b class="num">7</b><div class="bar"><span style="width:50%;background:var(--ct-color-chart-5)"></span></div></div>
+            <div class="card-pad" style="padding-top:var(--ct-space-150)"><button class="btn btn-secondary btn-block"><svg class="i"><use href="#i-send"/></svg>Send "stock" reasons to Supply</button></div>
+          </section>
+          <section class="ai desktop-only" aria-label="Ask ColsTorso">
+            <div class="hd"><svg class="i"><use href="#i-sparkles"/></svg>Ask ColsTorso</div>
+            <div class="msg">Last year's Bakery push did best in stores with afternoon markdowns (+$410/wk vs +$150/wk). Add that as the suggested plan?
+              <div class="cite"><span>Campaign #7 results</span><span>Best practice #112</span></div></div>
+            <div class="prompts"><button>Yes, add it</button><button>Show the data</button></div>
+          </section>
+        </div>
+      </div>
+    </main>
+    <nav class="tabbar" aria-label="Main">
+      <a href="#"><svg class="i i-lg"><use href="#i-layout-dashboard"/></svg>Overview</a>
+      <a href="#" aria-current="page"><svg class="i i-lg"><use href="#i-megaphone"/></svg>Campaigns</a>
+      <a href="#"><svg class="i i-lg"><use href="#i-message-square"/></svg>Feedback<span class="badge">38</span></a>
+      <a href="#"><svg class="i i-lg"><use href="#i-chart-line"/></svg>Impact</a>
+      <a href="#"><svg class="i i-lg"><use href="#i-sparkles"/></svg>Ask</a>
+    </nav>
+  </div>
+</div>
+</div>
+</div>
+<aside class="mk-notes" aria-label="Design annotations">
+  <h2>HQ · dashboard &amp; campaign builder</h2>
+  <p class="sub">HQ steers what stores focus on. The builder protects store attention and sets up honest measurement.</p>
+  <ol>
+    <li data-n="1"><span><b>Store workload is a headline number</b>Missions per store per day sits next to impact and acceptance, so HQ sees the cost of adding more work alongside the benefit.<small>Fixes: alert fatigue starting at HQ (P1)</small></span></li>
+    <li data-n="2"><span><b>Four short steps</b>Goal, stores, message, review. Drafts save automatically, and the current step is shown with a number and a label.<small>Fixes: campaigns that are hard to set up</small></span></li>
+    <li data-n="3"><span><b>Pick stores with readable rules</b>Each rule reads like a sentence and can be removed, with the matching store count updating live. Exclusions such as refits are rules too, not a manual list.<small>Fixes: campaigns sent to stores they don't fit (P1, P6)</small></span></li>
+    <li data-n="4"><span><b>Mission budget check</b>Before launch, HQ sees how many stores hit their daily limit and what would be pushed back, and can start them later instead.<small>Fixes: alert fatigue (P1)</small></span></li>
+    <li data-n="5"><span><b>Comparison group set at launch</b>Comparison stores are picked at random up front, so the reported lift means something.<small>Fixes: trust in impact numbers (P5)</small></span></li>
+    <li data-n="6"><span><b>Live store preview</b>HQ sees the exact card a manager will get, including the per-store "why", before anything is sent.<small>Fixes: unclear why, the gap between HQ and stores (P2, P6)</small></span></li>
+    <li data-n="7"><span><b>Store feedback comes back to HQ</b>Rejection reasons are counted and can be passed to the right team. Stores can see that their feedback lands somewhere.<small>Fixes: the gap between HQ and stores (P6)</small></span></li>
+  </ol>
+</aside>
+</div>
+<script src="mk.js"></script>
+</body>
+</html>

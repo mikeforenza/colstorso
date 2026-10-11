@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mission detail — ColsTorso · Example data</title>
+<link rel="stylesheet" href="../tokens.css"><link rel="stylesheet" href="ct-components.css">
+<style>
+  .md-grid { display: grid; grid-template-columns: minmax(0,1fr); gap: var(--ct-space-200); }
+  @container app (min-width: 1024px) { .md-grid { grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: var(--ct-space-300); align-items: start; } .md-hero { grid-column: 1 / -1; } }
+  .md-hero .h1 { font-size: var(--ct-font-size-150); margin-top: var(--ct-space-100); }
+  @container app (min-width: 1024px) { .md-hero .h1 { font-size: var(--ct-font-size-187); } }
+  .payoff { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: var(--ct-space-100); margin-top: var(--ct-space-200); }
+  .payoff .card { padding: var(--ct-space-150); display: grid; gap: 2px; }
+  .payoff .k { font: var(--ct-type-caption); color: var(--ct-color-text-muted); }
+  .payoff .v { font: var(--ct-type-metric-sm); font-size: var(--ct-font-size-125); }
+  @container app (min-width: 1024px) { .payoff { grid-template-columns: repeat(4, minmax(0, 220px)); } }
+  .cmp { display: grid; gap: var(--ct-space-150); margin-top: var(--ct-space-150); }
+  .cmp .r { display: grid; grid-template-columns: 112px 1fr 56px; gap: var(--ct-space-100); align-items: center; font: var(--ct-type-body-sm); }
+  .cmp .track { height: 20px; background: var(--ct-color-surface-sunken); border-radius: var(--ct-radius-sm); }
+  .cmp .fill { height: 100%; border-radius: var(--ct-radius-sm); background: var(--ct-color-impact-control-line); }
+  .cmp .r.you .fill { background: var(--ct-color-priority-must-border); }
+  .cmp .r b { text-align: right; font-variant-numeric: tabular-nums; }
+  .peer { margin-top: var(--ct-space-150); font: var(--ct-type-body-sm); color: var(--ct-color-text-secondary); display: flex; gap: var(--ct-space-100); }
+  .causes { display: grid; gap: var(--ct-space-100); margin-top: var(--ct-space-150); }
+  .cause { display: flex; align-items: center; gap: var(--ct-space-100); min-height: 52px; padding: 0 var(--ct-space-150) 0 var(--ct-space-050); border: 1px solid var(--ct-color-border-default); border-radius: var(--ct-radius-md); background: var(--ct-color-surface-raised); }
+  .cause.on { border-color: var(--ct-color-border-brand); background: var(--ct-color-surface-selected); }
+  .cause .grow { flex: 1; font: var(--ct-type-body); }
+  .cause .pct { font: var(--ct-type-caption); color: var(--ct-color-text-muted); }
+  .bp { display: grid; gap: var(--ct-space-100); padding: var(--ct-space-200); background: var(--ct-color-surface-accent-subtle); border: 1px solid var(--ct-color-marigold-300); border-radius: var(--ct-radius-lg); }
+  [data-theme="dark"] .bp { border-color: var(--ct-color-marigold-700); }
+  .bp .hd { display: flex; align-items: center; gap: var(--ct-space-100); font: var(--ct-type-label); font-size: var(--ct-font-size-100); }
+  .step { display: grid; grid-template-columns: 32px 1fr; gap: var(--ct-space-150); padding: var(--ct-space-150) 0; border-top: 1px solid var(--ct-color-border-subtle); }
+  .step:first-of-type { border-top: 0; }
+  .step .n { width: 32px; height: 32px; border-radius: var(--ct-radius-circle); background: var(--ct-color-brand-primary-subtle); color: var(--ct-color-text-brand); display: grid; place-items: center; font: var(--ct-type-label); }
+  .field { display: grid; gap: var(--ct-space-050); margin-top: var(--ct-space-100); }
+  .field label { font: var(--ct-type-label); }
+  .input { display: flex; align-items: center; gap: var(--ct-space-100); min-height: var(--ct-size-touch-target); padding: 0 var(--ct-space-150); border: 1px solid var(--ct-color-border-strong); border-radius: var(--ct-radius-md); background: var(--ct-color-surface-raised); font: var(--ct-type-body); }
+  .input .grow { flex: 1; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: var(--ct-space-100); }
+  .tasklet { display: flex; align-items: center; gap: var(--ct-space-050); min-height: 48px; font: var(--ct-type-body); }
+  .tasklet .who { margin-left: auto; font: var(--ct-type-caption); color: var(--ct-color-text-muted); white-space: nowrap; }
+  .back { display: inline-flex; align-items: center; gap: 4px; }
+  .actionbar { grid-template-columns: minmax(0,1fr) minmax(0,2fr); }
+  @container app (min-width: 1024px) { .actionbar { grid-template-columns: 180px 280px; justify-content: end; padding-right: var(--ct-space-400); } }
+  .spark { width: 100%; height: 64px; margin-top: var(--ct-space-200); display: block; }
+  .legend { display: flex; gap: var(--ct-space-200); font: var(--ct-type-caption); color: var(--ct-color-text-secondary); margin-top: var(--ct-space-100); align-items: center; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .sw { width: 18px; height: 0; border-top: 3px solid var(--ct-color-priority-must-border); display: inline-block; }
+  .sw.med { border-top: 2px dashed var(--ct-color-impact-control-line); }
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-alarm-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8" />
+  <path d="M12 9v4l2 2" />
+  <path d="M5 3 2 6" />
+  <path d="m22 6-3-3" />
+  <path d="M6.38 18.7 4 21" />
+  <path d="M17.64 18.67 20 21" /></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" />
+  <path d="m12 5 7 7-7 7" /></symbol><symbol id="i-arrow-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7" />
+  <path d="M12 19V5" /></symbol><symbol id="i-badge-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+  <path d="m16 9-5.5 5.5L8 12" /></symbol><symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0" />
+  <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" /></symbol><symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v3" />
+  <path d="M16 2v3" />
+  <rect x="3" y="3" width="18" height="18" rx="2" />
+  <path d="M3 9h18" /></symbol><symbol id="i-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z" />
+  <circle cx="12" cy="13" r="3" /></symbol><symbol id="i-chart-column" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16" />
+  <path d="M18 17V9" />
+  <path d="M13 17V5" />
+  <path d="M8 17v-3" /></symbol><symbol id="i-chart-line" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16" />
+  <path d="m19 9-5 5-4-4-3 3" /></symbol><symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></symbol><symbol id="i-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></symbol><symbol id="i-circle-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" />
+  <path d="m16 9-5.5 5.5L8 12" /></symbol><symbol id="i-circle-help" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" />
+  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+  <path d="M12 17h.01" /></symbol><symbol id="i-clipboard-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+  <path d="m9 14 2 2 4-4" /></symbol><symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" />
+  <path d="M12 6v6l4 2" /></symbol><symbol id="i-cloud-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.94 5.274A7 7 0 0 1 15.71 10h1.79a4.5 4.5 0 0 1 4.222 6.057" />
+  <path d="M18.796 18.81A4.5 4.5 0 0 1 17.5 19H9A7 7 0 0 1 5.79 5.78" />
+  <path d="m2 2 20 20" /></symbol><symbol id="i-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3" />
+  <path d="M3 5V19A9 3 0 0 0 21 19V5" />
+  <path d="M3 12A9 3 0 0 0 21 12" /></symbol><symbol id="i-ellipsis" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1" />
+  <circle cx="19" cy="12" r="1" />
+  <circle cx="5" cy="12" r="1" /></symbol><symbol id="i-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4" /></symbol><symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" />
+  <path d="M12 16v-4" />
+  <path d="M12 8h.01" /></symbol><symbol id="i-layout-dashboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1" />
+  <rect width="7" height="5" x="14" y="3" rx="1" />
+  <rect width="7" height="9" x="14" y="12" rx="1" />
+  <rect width="7" height="5" x="3" y="16" rx="1" /></symbol><symbol id="i-lightbulb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+  <path d="M9 18h6" />
+  <path d="M10 22h4" /></symbol><symbol id="i-list-checks" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 5h8" />
+  <path d="M13 12h8" />
+  <path d="M13 19h8" />
+  <path d="m3 17 2 2 4-4" />
+  <path d="m3 7 2 2 4-4" /></symbol><symbol id="i-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" /></symbol><symbol id="i-megaphone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 6a13 13 0 0 0 8.4-2.8A1 1 0 0 1 21 4v12a1 1 0 0 1-1.6.8A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" />
+  <path d="M6 14a12 12 0 0 0 2.4 7.2 2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14" />
+  <path d="M8 6v8" /></symbol><symbol id="i-message-square" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /></symbol><symbol id="i-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19v3" />
+  <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+  <rect x="9" y="2" width="6" height="13" rx="3" /></symbol><symbol id="i-minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /></symbol><symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" />
+  <path d="M12 5v14" /></symbol><symbol id="i-scan-barcode" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2" />
+  <path d="M17 3h2a2 2 0 0 1 2 2v2" />
+  <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
+  <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
+  <path d="M8 7v10" />
+  <path d="M12 7v10" />
+  <path d="M17 7v10" /></symbol><symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34" />
+  <circle cx="11" cy="11" r="8" /></symbol><symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" />
+  <path d="m21.854 2.147-10.94 10.939" /></symbol><symbol id="i-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
+  <circle cx="12" cy="12" r="3" /></symbol><symbol id="i-shield-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+  <path d="m9 12 2 2 4-4" /></symbol><symbol id="i-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
+  <path d="M20 2v4" />
+  <path d="M22 4h-4" />
+  <circle cx="4" cy="20" r="2" /></symbol><symbol id="i-store" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5" />
+  <path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244" />
+  <path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05" /></symbol><symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4" />
+  <path d="M12 2v2" />
+  <path d="M12 20v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="m17.66 17.66 1.41 1.41" />
+  <path d="M2 12h2" />
+  <path d="M20 12h2" />
+  <path d="m6.34 17.66-1.41 1.41" />
+  <path d="m19.07 4.93-1.41 1.41" /></symbol><symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" />
+  <circle cx="12" cy="12" r="6" />
+  <circle cx="12" cy="12" r="2" /></symbol><symbol id="i-thumbs-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z" />
+  <path d="M7 10v12" /></symbol><symbol id="i-trending-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 17h6v-6" />
+  <path d="m22 17-8.5-8.5-5 5L2 7" /></symbol><symbol id="i-trending-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 7h6v6" />
+  <path d="m22 7-8.5 8.5-5-5L2 17" /></symbol><symbol id="i-triangle-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+  <path d="M12 9v4" />
+  <path d="M12 17h.01" /></symbol><symbol id="i-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14.66V17a1 1 0 0 1-1 1 2 2 0 0 0-2 2v2" />
+  <path d="M14 14.66V17a1 1 0 0 0 1 1 2 2 0 0 1 2 2v2" />
+  <path d="M17.916 10H19.5A2.5 2.5 0 0 0 22 7.5V5a1 1 0 0 0-1-1h-3" />
+  <path d="M4 22h16" />
+  <path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z" />
+  <path d="M6.084 10H4.5A2.5 2.5 0 0 1 2 7.5V5a1 1 0 0 1 1-1h3" /></symbol><symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+  <circle cx="12" cy="7" r="4" /></symbol><symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+  <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+  <circle cx="9" cy="7" r="4" /></symbol><symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18" />
+  <path d="m6 6 12 12" /></symbol></svg>
+<div class="mk-stage">
+<div class="mk-frame">
+<div class="mk-example">Example data · Harbor &amp; Pine Market (fictional)</div>
+<div class="ct-app">
+<div class="shell">
+  <nav class="sidenav" aria-label="Main">
+    <div class="brand"><img src="../logo.svg" alt="ColsTorso"></div>
+    <a href="#"><svg class="i"><use href="#i-sun"/></svg>Today</a>
+    <a href="#" aria-current="page"><svg class="i"><use href="#i-target"/></svg>Missions<span class="count">7</span></a>
+    <a href="#"><svg class="i"><use href="#i-list-checks"/></svg>Tasks<span class="count">4</span></a>
+    <a href="#"><svg class="i"><use href="#i-chart-line"/></svg>Impact</a>
+    <a href="#"><svg class="i"><use href="#i-lightbulb"/></svg>Best practices</a>
+    <a href="#"><svg class="i"><use href="#i-sparkles"/></svg>Ask ColsTorso</a>
+    <div class="foot"><a href="#"><svg class="i"><use href="#i-settings"/></svg>Settings</a></div>
+  </nav>
+  <div class="main">
+    <header class="topbar">
+      <a class="iconbtn back" href="a-store-today.html" aria-label="Back to Today"><svg class="i i-lg"><use href="#i-chevron-right" transform="rotate(180 12 12)"/></svg></a>
+      <div class="ctx"><b>Mission · Bakery waste</b><span>S014 Lakeview · suggested Mon 12 Oct</span></div>
+      <button class="iconbtn" aria-label="Ask ColsTorso about this mission"><svg class="i"><use href="#i-sparkles"/></svg></button>
+    </header>
+    <div class="fresh" role="status">
+      <span class="src ok"><svg class="i i-sm"><use href="#i-circle-check"/></svg>Waste data through Sun 11 Oct · updated 5:10 AM</span>
+    </div>
+    <main class="content">
+      <div class="md-grid">
+        <section class="md-hero">
+          <div class="meta" style="display:flex;gap:8px;flex-wrap:wrap"><span class="chip p-must"><svg class="i"><use href="#i-flame"/></svg>Must · 2 of 3 today</span><span class="chip kind"><svg class="i"><use href="#i-chart-column"/></svg>Opportunity</span></div>
+          <h1 class="h1">Bakery waste is double the rate of similar stores</h1>
+          <div class="payoff" data-note="1">
+            <div class="card"><span class="k">Expected payoff</span><span class="v imp-pos num">+$640/wk</span></div>
+            <div class="card"><span class="k">Your time</span><span class="v num">~20 min</span></div>
+            <div class="card"><span class="k">Confidence</span><span class="v">Medium</span></div>
+            <div class="card desktop-only"><span class="k">Measured over</span><span class="v num">4 weeks</span></div>
+          </div>
+        </section>
+
+        <div style="display:grid;gap:var(--ct-space-200)">
+          <section class="card card-pad" aria-labelledby="why-h" data-note="2">
+            <h2 id="why-h" class="h3">Why you're seeing this</h2>
+            <p class="lede">For 3 weeks running, more of your Bakery stock has been thrown away than in similar stores.</p>
+            <div class="cmp" role="img" aria-label="Bakery waste as a share of sales: your store 11.8 percent, similar-store median 5.6 percent, best quarter 3.9 percent">
+              <div class="r you"><span><b style="text-align:left">Your store</b></span><div class="track"><div class="fill" style="width:94%"></div></div><b>11.8%</b></div>
+              <div class="r"><span>Similar median</span><div class="track"><div class="fill" style="width:45%"></div></div><b>5.6%</b></div>
+              <div class="r"><span>Best quarter</span><div class="track"><div class="fill" style="width:31%"></div></div><b>3.9%</b></div>
+            </div>
+            <svg class="spark" viewBox="0 0 320 60" preserveAspectRatio="none" role="img" aria-label="Weekly waste rate, last 8 weeks: rising from 6 percent to 11.8 percent; similar-store median flat near 5.6 percent">
+              <line x1="0" y1="50" x2="320" y2="50" stroke="var(--ct-color-impact-control-line)" stroke-width="2" stroke-dasharray="5 4" vector-effect="non-scaling-stroke"/>
+              <polyline fill="none" stroke="var(--ct-color-priority-must-border)" stroke-width="3" stroke-linejoin="round" vector-effect="non-scaling-stroke" points="0,46 45,48 90,44 135,47 180,40 225,24 270,14 315,10"/>
+              
+            </svg>
+            <div class="legend"><span><i class="sw you"></i>Your store</span><span><i class="sw med"></i>Similar median</span><span class="muted" style="margin-left:auto">Last 8 weeks</span></div>
+            <p class="peer"><svg class="i i-sm"><use href="#i-info"/></svg><span>Compared with <b>22 Standard-format stores</b> with similar Bakery space and footfall. <a href="#">How we compare</a></span></p>
+          </section>
+
+          <section class="card card-pad" aria-labelledby="cause-h" data-note="3">
+            <h2 id="cause-h" class="h3">What's likely causing it?</h2>
+            <p class="lede">Tick what you found on the floor. We've ordered these by how often they were the cause in similar stores.</p>
+            <div class="causes" role="group" aria-label="Likely causes">
+              <div class="cause on"><button class="check" role="checkbox" aria-checked="true" aria-label="Markdown happens too late"><span><svg class="i i-sm"><use href="#i-check"/></svg></span></button><span class="grow">Markdown happens too late</span><span class="pct">41% of stores</span></div>
+              <div class="cause"><button class="check" role="checkbox" aria-checked="false" aria-label="Ordering more than we sell"><span></span></button><span class="grow">Ordering more than we sell</span><span class="pct">33%</span></div>
+              <div class="cause"><button class="check" role="checkbox" aria-checked="false" aria-label="Delivery time changed"><span></span></button><span class="grow">Delivery time changed</span><span class="pct">14%</span></div>
+              <div class="cause"><button class="check" role="checkbox" aria-checked="false" aria-label="Something else"><span></span></button><span class="grow">Something else…</span></div>
+            </div>
+          </section>
+        </div>
+
+        <div style="display:grid;gap:var(--ct-space-200)">
+          <section class="bp" aria-labelledby="bp-h" data-note="4">
+            <div class="hd"><svg class="i"><use href="#i-lightbulb"/></svg><span id="bp-h">What worked in Oak Hill Standard</span></div>
+            <p style="font:var(--ct-type-body-sm)">"Moved the Bakery markdown from 7 PM to 4 PM and cut the second bread bake on Mondays."</p>
+            <p style="font:var(--ct-type-body-sm)" class="sec"><span class="imp-pos"><b>+$520/wk measured</b></span> vs similar stores · used by 4 stores</p>
+            <button class="btn btn-secondary" style="justify-self:start"><svg class="i"><use href="#i-plus"/></svg>Use this plan</button>
+          </section>
+
+          <section class="card card-pad" aria-labelledby="plan-h" data-note="5">
+            <h2 id="plan-h" class="h3">Your action plan</h2>
+            <p class="lede">We've filled this in from what worked elsewhere. Change anything you like.</p>
+            <div class="step"><span class="n">1</span><div><b>What will you do?</b>
+              <div class="field"><div class="input"><span class="grow">Markdown at 4 PM instead of 7 PM</span><svg class="i muted"><use href="#i-chevron-down"/></svg></div></div></div></div>
+            <div class="step"><span class="n">2</span><div><b>Who and when</b>
+              <div class="two field"><div class="input"><svg class="i i-sm muted"><use href="#i-user"/></svg><span class="grow">Sam (Bakery)</span></div><div class="input"><svg class="i i-sm muted"><use href="#i-calendar"/></svg><span class="grow">From Tue</span></div></div></div></div>
+            <div class="step"><span class="n">3</span><div><b>Tasks we'll create</b>
+              <div class="tasklet"><button class="check" role="checkbox" aria-checked="false" aria-label="Brief bakery team"><span></span></button>Brief Bakery team<span class="who">Sam · Tue</span></div>
+              <div class="tasklet"><button class="check" role="checkbox" aria-checked="false" aria-label="Update markdown schedule"><span></span></button>Update markdown schedule<span class="who">You · Tue</span></div>
+              <div class="tasklet"><button class="check" role="checkbox" aria-checked="false" aria-label="Photo of 4 PM markdown"><span></span></button>Photo of 4 PM markdown<span class="who">Sam · Wed</span></div>
+            </div></div>
+            <p class="peer" data-note="6"><svg class="i i-sm"><use href="#i-shield-check"/></svg><span>We'll measure the result against 22 similar stores <b>not</b> running this mission, for 4 weeks. Your district manager will see the plan.</span></p>
+          </section>
+        </div>
+      </div>
+    </main>
+    <div class="actionbar" data-note="7">
+      <button class="btn btn-secondary btn-lg"><svg class="i"><use href="#i-alarm-clock"/></svg>Snooze</button>
+      <button class="btn btn-primary btn-lg"><svg class="i"><use href="#i-check"/></svg>Accept &amp; start</button>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<aside class="mk-notes" aria-label="Design annotations">
+  <h2>Mission detail · accept &amp; plan</h2>
+  <p class="sub">Evidence, cause, plan and commitment on one scrolling page, with the decision always within thumb reach.</p>
+  <ol>
+    <li data-n="1"><span><b>Payoff first</b>The expected $ per week, time needed and confidence come before any chart, the same three facts as on the card, so nothing changes between screens.<small>Fixes: unclear why, unclear value (P2)</small></span></li>
+    <li data-n="2"><span><b>The comparison spelled out</b>Bars with labelled values, an 8-week trend against the similar-store median, and a plain sentence naming the 22 stores you're compared with. Charts have text alternatives.<small>Fixes: unclear why, fairness worries (P2, P5)</small></span></li>
+    <li data-n="3"><span><b>Tap causes, don't type them</b>Likely causes in order of how often they were the real cause in other stores, picked with 44 px checkboxes. Only "Something else" needs typing.<small>Fixes: slow data entry on the shop floor (P3)</small></span></li>
+    <li data-n="4"><span><b>A proven fix ready to use</b>The best result from a similar store, with its measured impact, can be copied in one tap. This links sharing best practice to doing the work.<small>Fixes: best practices that don't spread (P6)</small></span></li>
+    <li data-n="5"><span><b>Plan already filled in</b>The action, owner, date and tasks are suggested, so Accept takes seconds. Tasks show up in the Tasks tab with whoever owns them.<small>Fixes: slow planning (P3)</small></span></li>
+    <li data-n="6"><span><b>How it will be measured, stated upfront</b>The comparison group and time window are set before work starts, so the result can't be cherry-picked later.<small>Fixes: trust in impact numbers (P5)</small></span></li>
+    <li data-n="7"><span><b>Sticky decision bar</b>Accept is wider and on the right, in thumb reach. Snooze offers 3 days, 1 week or a custom date. It works offline and syncs later.<small>Fixes: one-thumb use, flaky connection (P4)</small></span></li>
+  </ol>
+</aside>
+</div>
+<script src="mk.js"></script>
+</body>
+</html>

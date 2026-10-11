@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Today — ColsTorso (Store manager) · Example data</title>
+<link rel="stylesheet" href="../tokens.css"><link rel="stylesheet" href="ct-components.css">
+<style>
+  .today-grid { display: grid; grid-template-columns: minmax(0,1fr); gap: var(--ct-space-300); }
+  @container app (min-width: 1024px) { .today-grid { grid-template-columns: minmax(0, 1fr) 360px; align-items: start; } }
+  .hello .h1 { font-size: var(--ct-font-size-150); }
+  @container app (min-width: 1024px) { .hello .h1 { font-size: var(--ct-font-size-187); } }
+  .budget { display: flex; align-items: center; gap: var(--ct-space-100); flex-wrap: wrap; margin-top: var(--ct-space-100); font: var(--ct-type-body-sm); color: var(--ct-color-text-secondary); }
+  .stack { display: grid; gap: var(--ct-space-150); }
+  .backlog { display: flex; align-items: center; gap: var(--ct-space-150); padding: var(--ct-space-150) var(--ct-space-200); min-height: 56px; text-decoration: none; color: var(--ct-color-text-primary); }
+  .backlog .grow { flex: 1; }
+  .live { display: grid; gap: var(--ct-space-100); padding: var(--ct-space-150) var(--ct-space-200); border-top: 1px solid var(--ct-color-border-subtle); }
+  .live:first-of-type { border-top: 0; }
+  .live .top { display: flex; justify-content: space-between; gap: var(--ct-space-100); font: var(--ct-type-label); font-size: var(--ct-font-size-100); }
+  .live .sub { display: flex; justify-content: space-between; font: var(--ct-type-body-sm); color: var(--ct-color-text-secondary); }
+  .rail { display: grid; gap: var(--ct-space-200); }
+  .wk { display: grid; grid-template-columns: 1fr 1fr; }
+  .wk .kpi { border-top: 1px solid var(--ct-color-border-subtle); }
+  .wk .kpi:nth-child(odd) { border-right: 1px solid var(--ct-color-border-subtle); }
+  .wk .kpi .v { font-size: var(--ct-font-size-150); }
+  .wk .kpi:nth-child(-n+2) { border-top: 0; }
+  .undo { position: sticky; bottom: calc(var(--ct-size-nav-bottom-height) + 12px); margin: 0 var(--ct-space-200); z-index: var(--ct-z-toast); }
+  @container app (min-width: 1024px) { .undo { bottom: 24px; max-width: 520px; margin: 0 auto; } }
+</style>
+</head>
+<body>
+<!--ICONS-->
+<div class="mk-stage">
+<div class="mk-frame">
+<div class="mk-example">Example data · Harbor &amp; Pine Market (fictional)</div>
+<div class="ct-app">
+<div class="shell">
+  <nav class="sidenav" aria-label="Main">
+    <div class="brand"><img src="../logo.svg" alt="ColsTorso"></div>
+    <a href="#" aria-current="page"><svg class="i"><use href="#i-sun"/></svg>Today</a>
+    <a href="#"><svg class="i"><use href="#i-target"/></svg>Missions<span class="count">7</span></a>
+    <a href="#"><svg class="i"><use href="#i-list-checks"/></svg>Tasks<span class="count">4</span></a>
+    <a href="#"><svg class="i"><use href="#i-chart-line"/></svg>Impact</a>
+    <a href="#"><svg class="i"><use href="#i-lightbulb"/></svg>Best practices</a>
+    <a href="#"><svg class="i"><use href="#i-sparkles"/></svg>Ask ColsTorso</a>
+    <div class="group">My store</div>
+    <a href="#"><svg class="i"><use href="#i-store"/></svg>S014 Lakeview</a>
+    <a href="#"><svg class="i"><use href="#i-users"/></svg>My team</a>
+    <div class="foot"><a href="#"><svg class="i"><use href="#i-settings"/></svg>Settings</a></div>
+  </nav>
+  <div class="main">
+    <header class="topbar">
+      <img class="logo" src="../logo-mark.svg" alt="ColsTorso">
+      <div class="ctx"><b>S014 · Lakeview Standard</b><span>Mon 12 Oct · Week 41</span></div>
+      <button class="iconbtn" aria-label="Notifications, 2 unread"><svg class="i"><use href="#i-bell"/></svg><span class="dot">2</span></button>
+      <span class="avatar" role="img" aria-label="Jordan Okafor">JO</span>
+    </header>
+    <div class="fresh" role="status" data-note="1">
+      <span class="src ok"><svg class="i i-sm"><use href="#i-circle-check"/></svg>Sales &amp; waste: through Sun 11 Oct</span>
+      <span class="src aging"><svg class="i i-sm"><use href="#i-clock"/></svg>Labor: 2 days old</span>
+      <span class="muted">Updated 5:10 AM</span>
+    </div>
+    <main class="content">
+      <div class="today-grid">
+        <div class="stack" style="gap:var(--ct-space-300)">
+          <section class="hello">
+            <h1 class="h1">Good morning, Jordan</h1>
+            <div class="budget" data-note="2"><span class="chip s-neutral"><svg class="i"><use href="#i-target"/></svg>3 missions today</span><span>About 45 min in total · picked from 11 signals</span></div>
+          </section>
+
+          <section aria-labelledby="todo-h">
+            <h2 id="todo-h" class="sr-only">Today's missions</h2>
+            <div class="stack">
+              <article class="card mission must" data-note="3">
+                <div class="meta">
+                  <span class="chip p-must"><svg class="i"><use href="#i-flame"/></svg>Must</span>
+                  <span class="chip kind"><svg class="i"><use href="#i-triangle-alert"/></svg>Alert</span>
+                  <span class="rank">1 of 3</span>
+                </div>
+                <h3><a href="b-mission-detail.html">Hot Drinks Bar has almost no sales since Thursday</a></h3>
+                <div class="why" data-note="4">
+                  <span class="lbl">Why you're seeing this</span>
+                  <span><b class="num">$38</b> sold Thu–Sun vs <b class="num">$1,240</b> expected. 20 similar stores sold normally, so the machine or till button may be down.</span>
+                </div>
+                <div class="facts">
+                  <div class="fact"><span class="k">If fixed</span><span class="v big imp-pos num"><svg class="i i-sm"><use href="#i-trending-up"/></svg>+$1.2k/wk</span></div>
+                  <div class="fact"><span class="k">Effort</span><span class="v num">~10 min</span></div>
+                  <div class="fact"><span class="k">Confidence</span><span class="v"><span class="conf" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></span>High</span></div>
+                </div>
+                <div class="btn-row" data-note="5">
+                  <button class="btn btn-primary btn-lg"><svg class="i"><use href="#i-check"/></svg>Accept</button>
+                  <button class="btn btn-secondary btn-lg"><svg class="i"><use href="#i-alarm-clock"/></svg>Snooze</button>
+                  <button class="iconbtn" style="width:56px;height:56px" aria-label="More options: not for my store, reassign"><svg class="i"><use href="#i-ellipsis"/></svg></button>
+                </div>
+              </article>
+
+              <article class="card mission must">
+                <div class="meta">
+                  <span class="chip p-must"><svg class="i"><use href="#i-flame"/></svg>Must</span>
+                  <span class="chip kind"><svg class="i"><use href="#i-chart-column"/></svg>Opportunity</span>
+                  <span class="rank">2 of 3</span>
+                </div>
+                <h3><a href="b-mission-detail.html">Bakery waste is double the rate of similar stores</a></h3>
+                <div class="why">
+                  <span class="lbl">Why you're seeing this</span>
+                  <span>Waste is <b class="num">11.8%</b> of Bakery sales vs <b class="num">5.6%</b> for 22 similar stores, 3 weeks running.</span>
+                </div>
+                <div class="facts">
+                  <div class="fact"><span class="k">If fixed</span><span class="v big imp-pos num"><svg class="i i-sm"><use href="#i-trending-up"/></svg>+$640/wk</span></div>
+                  <div class="fact"><span class="k">Effort</span><span class="v num">~20 min</span></div>
+                  <div class="fact"><span class="k">Confidence</span><span class="v"><span class="conf" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></span>Medium</span></div>
+                </div>
+                <div class="btn-row">
+                  <button class="btn btn-primary btn-lg"><svg class="i"><use href="#i-check"/></svg>Accept</button>
+                  <button class="btn btn-secondary btn-lg"><svg class="i"><use href="#i-alarm-clock"/></svg>Snooze</button>
+                  <button class="iconbtn" style="width:56px;height:56px" aria-label="More options"><svg class="i"><use href="#i-ellipsis"/></svg></button>
+                </div>
+              </article>
+
+              <article class="card mission should">
+                <div class="meta">
+                  <span class="chip p-should"><svg class="i"><use href="#i-arrow-up"/></svg>Should</span>
+                  <span class="chip kind"><svg class="i"><use href="#i-megaphone"/></svg>HQ campaign</span>
+                  <span class="rank">3 of 3</span>
+                </div>
+                <h3><a href="b-mission-detail.html">Snacks sell 18% below what your shelf space predicts</a></h3>
+                <div class="why">
+                  <span class="lbl">Why you're seeing this</span>
+                  <span>Part of HQ's <b>Fall Snack Push</b>. You're 18% below 22 Standard stores with similar Snacks space.</span>
+                </div>
+                <div class="facts">
+                  <div class="fact"><span class="k">If fixed</span><span class="v big imp-pos num"><svg class="i i-sm"><use href="#i-trending-up"/></svg>+$410/wk</span></div>
+                  <div class="fact"><span class="k">Effort</span><span class="v num">~15 min</span></div>
+                  <div class="fact"><span class="k">Confidence</span><span class="v"><span class="conf" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></span>Medium</span></div>
+                </div>
+                <div class="btn-row">
+                  <button class="btn btn-primary btn-lg"><svg class="i"><use href="#i-check"/></svg>Accept</button>
+                  <button class="btn btn-secondary btn-lg"><svg class="i"><use href="#i-alarm-clock"/></svg>Snooze</button>
+                  <button class="iconbtn" style="width:56px;height:56px" aria-label="More options"><svg class="i"><use href="#i-ellipsis"/></svg></button>
+                </div>
+              </article>
+
+              <a class="card backlog" href="#" data-note="6">
+                <svg class="i muted"><use href="#i-circle-help"/></svg>
+                <span class="grow"><b>4 more ideas can wait</b><br><span class="sec" style="font:var(--ct-type-body-sm)">Lower value or low confidence. Not urgent.</span></span>
+                <svg class="i muted"><use href="#i-chevron-right"/></svg>
+              </a>
+            </div>
+          </section>
+
+          <section class="card" aria-labelledby="live-h" data-note="7">
+            <div class="section-h card-pad" style="padding-bottom:0;margin-bottom:var(--ct-space-100)"><h2 id="live-h" class="h3">Working on it</h2><a href="#">See all</a></div>
+            <div class="live">
+              <div class="top"><span>Coffee &amp; Tea end-cap reset</span><span class="imp-pos num">+$310 so far</span></div>
+              <div class="bar ok" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" aria-label="Week 2 of 4"><span style="width:50%"></span></div>
+              <div class="sub"><span>Week 2 of 4 · vs 20 similar stores</span><span>3/4 tasks</span></div>
+            </div>
+            <div class="live">
+              <div class="top"><span>Evening overtime</span><span class="imp-neu num">No clear change yet</span></div>
+              <div class="bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" aria-label="Week 1 of 4"><span style="width:25%"></span></div>
+              <div class="sub"><span>Week 1 of 4 · needs 2+ weeks of data</span><span>1/3 tasks</span></div>
+            </div>
+          </section>
+        </div>
+
+        <aside class="rail desktop-only" aria-label="This week">
+          <section class="card">
+            <div class="card-pad" style="padding-bottom:var(--ct-space-100)"><h2 class="h4">Lakeview this week</h2><p class="muted" style="font:var(--ct-type-body-sm)">Week to date vs plan</p></div>
+            <div class="wk">
+              <div class="kpi"><span class="k">Sales</span><span class="v num">$118k</span><span class="d imp-neg"><svg class="i i-sm"><use href="#i-trending-down"/></svg>−2.1% vs plan</span></div>
+              <div class="kpi"><span class="k">Waste</span><span class="v num">4.9%</span><span class="d imp-neg"><svg class="i i-sm"><use href="#i-trending-up"/></svg>+0.8 pts</span></div>
+              <div class="kpi"><span class="k">Labor hours</span><span class="v num">712</span><span class="d imp-pos"><svg class="i i-sm"><use href="#i-check"/></svg>On budget</span></div>
+              <div class="kpi"><span class="k">Customer score</span><span class="v num">84</span><span class="d imp-neu"><svg class="i i-sm"><use href="#i-minus"/></svg>No change</span></div>
+            </div>
+          </section>
+          <section class="ai" aria-label="Ask ColsTorso" data-note="8">
+            <div class="hd"><svg class="i"><use href="#i-sparkles"/></svg>Ask ColsTorso</div>
+            <div class="msg me">What changed in Bakery?</div>
+            <div class="msg">Waste rose after the Thursday delivery moved to 6 AM. Two similar stores cut waste ~40% by moving the markdown to 4 PM.
+              <div class="cite"><span>Waste · wk 39–41</span><span>Delivery log</span><span>Best practice #112</span></div>
+            </div>
+            <div class="prompts"><button>Plan my week</button><button>Why is labor late?</button></div>
+            <div class="input"><span>Ask about your store…</span><button class="iconbtn" aria-label="Voice input"><svg class="i"><use href="#i-mic"/></svg></button></div>
+          </section>
+        </aside>
+      </div>
+    </main>
+    <div class="toast undo" role="status"><svg class="i"><use href="#i-check"/></svg>Snoozed “Pet aisle gaps” until Thu<a href="#">Undo</a></div>
+    <nav class="tabbar" aria-label="Main">
+      <a href="#" aria-current="page" data-note="9"><svg class="i i-lg"><use href="#i-sun"/></svg>Today</a>
+      <a href="#"><svg class="i i-lg"><use href="#i-target"/></svg>Missions</a>
+      <a href="#"><svg class="i i-lg"><use href="#i-list-checks"/></svg>Tasks<span class="badge">4</span></a>
+      <a href="#"><svg class="i i-lg"><use href="#i-chart-line"/></svg>Impact</a>
+      <a href="#" data-note="8"><svg class="i i-lg"><use href="#i-sparkles"/></svg>Ask</a>
+    </nav>
+  </div>
+</div>
+</div>
+</div>
+<aside class="mk-notes" aria-label="Design annotations">
+  <h2>Store manager · Today</h2>
+  <p class="sub">Mobile-first. Opens on the 3 things worth doing today, each with its reason and payoff.</p>
+  <ol>
+    <li data-n="1"><span><b>Freshness per data source</b>Each feed shows its own age, and old data is marked with an icon and words, not just colour. A manager can see the labor numbers are 2 days old before acting on them.<small>Fixes: trust in the numbers (research P5, P7)</small></span></li>
+    <li data-n="2"><span><b>Daily budget, not an inbox</b>A hard cap of 3 missions, with total time shown. It says how many signals were checked so managers know the rest weren't lost.<small>Fixes: alert fatigue (P1)</small></span></li>
+    <li data-n="3"><span><b>Priority shown three ways</b>A label, an icon and a coloured left edge, plus "1 of 3" order. Never colour alone (WCAG 1.4.1).<small>Fixes: unclear priority (P1)</small></span></li>
+    <li data-n="4"><span><b>The "why" on the card</b>A plain-language reason with the real numbers and peer group, without opening the mission. Payoff, effort and confidence sit right below.<small>Fixes: unclear why (P2)</small></span></li>
+    <li data-n="5"><span><b>One-tap Accept or Snooze</b>56 px buttons in the thumb zone. Accept starts a suggested plan you can edit later, and Snooze defaults to 3 days with Undo. "Not for my store" sits behind ⋯ and asks for a one-tap reason, which goes back to HQ.<small>Fixes: slow decisions, missing feedback to HQ (P3, P6)</small></span></li>
+    <li data-n="6"><span><b>Backlog kept out of the way</b>Lower-value ideas are still there to browse, but they don't fill the main list.<small>Fixes: alert fatigue (P1)</small></span></li>
+    <li data-n="7"><span><b>Progress shown honestly</b>Live missions show results against similar stores, and say "No clear change yet" until there's enough data to tell.<small>Fixes: trust in impact numbers (P5)</small></span></li>
+    <li data-n="8"><span><b>AI that shows its sources</b>In the Ask tab on mobile and the right-hand column on desktop. Every answer lists the data it used. It suggests, and never acts without the manager tapping.<small>Fixes: black-box AI</small></span></li>
+    <li data-n="9"><span><b>5-tab bottom bar</b>Big tap targets with labels under the icons. On desktop it becomes a side nav with the same items in the same order.<small>Fixes: weak mobile experience (P4)</small></span></li>
+  </ol>
+</aside>
+</div>
+<script src="mk.js"></script>
+</body>
+</html>

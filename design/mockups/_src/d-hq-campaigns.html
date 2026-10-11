@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HQ dashboard &amp; campaigns — ColsTorso · Example data</title>
+<link rel="stylesheet" href="../tokens.css"><link rel="stylesheet" href="ct-components.css">
+<style>
+  .hq { display: grid; grid-template-columns: minmax(0,1fr); gap: var(--ct-space-200); }
+  @container app (min-width: 1024px) { .hq { grid-template-columns: minmax(0,1fr) 380px; gap: var(--ct-space-300); align-items: start; } }
+  .pagehead { display: flex; flex-wrap: wrap; gap: var(--ct-space-150); align-items: end; justify-content: space-between; }
+  .stepper { display: flex; gap: var(--ct-space-100); flex-wrap: wrap; margin: var(--ct-space-150) 0 var(--ct-space-200); counter-reset: s; }
+  .stepper li { list-style: none; display: inline-flex; align-items: center; gap: var(--ct-space-100); font: var(--ct-type-label); color: var(--ct-color-text-secondary); padding-right: var(--ct-space-150); }
+  .stepper li .n { width: 28px; height: 28px; border-radius: var(--ct-radius-circle); display: grid; place-items: center; border: 2px solid var(--ct-color-border-strong); font: var(--ct-type-caption); font-weight: 700; }
+  .stepper li.done .n { background: var(--ct-color-status-success-solid); border-color: var(--ct-color-status-success-solid); color: var(--ct-color-text-inverse); }
+  .stepper li[aria-current="step"] { color: var(--ct-color-text-primary); }
+  .stepper li[aria-current="step"] .n { background: var(--ct-color-brand-primary); border-color: var(--ct-color-brand-primary); color: var(--ct-color-text-on-brand); }
+  .stepper { padding: 0; }
+  .bgrid { display: grid; grid-template-columns: minmax(0,1fr); gap: var(--ct-space-300); }
+  @container app (min-width: 1024px) { .bgrid { grid-template-columns: minmax(0,1fr) 280px; } }
+  .fld { display: grid; gap: var(--ct-space-100); margin-bottom: var(--ct-space-250); }
+  .fld > label, .fld > .lbl { font: var(--ct-type-label); font-size: var(--ct-font-size-100); }
+  .fld .hint { font: var(--ct-type-body-sm); color: var(--ct-color-text-secondary); }
+  .tokens { display: flex; flex-wrap: wrap; gap: var(--ct-space-100); }
+  .tok { display: inline-flex; align-items: center; gap: var(--ct-space-075); min-height: 36px; padding: 0 var(--ct-space-100) 0 var(--ct-space-150); border-radius: var(--ct-radius-pill); background: var(--ct-color-surface-selected); border: 1px solid var(--ct-color-border-brand); font: var(--ct-type-label); color: var(--ct-color-text-brand); }
+  .tok.ex { background: var(--ct-color-surface-sunken); border-color: var(--ct-color-border-strong); color: var(--ct-color-text-secondary); }
+  .tok .i { width: 16px; height: 16px; }
+  .addtok { min-height: 36px; padding: 0 var(--ct-space-150); border-radius: var(--ct-radius-pill); border: 1px dashed var(--ct-color-border-strong); background: transparent; font: var(--ct-type-label); color: var(--ct-color-text-secondary); }
+  .count { display: flex; gap: var(--ct-space-200); align-items: baseline; padding: var(--ct-space-150) var(--ct-space-200); background: var(--ct-color-surface-sunken); border-radius: var(--ct-radius-md); }
+  .count b { font: var(--ct-type-metric-sm); }
+  .budget { display: grid; grid-template-columns: auto 1fr; gap: var(--ct-space-150); padding: var(--ct-space-200); border-radius: var(--ct-radius-lg); background: var(--ct-color-status-warning-bg); border: 1px solid var(--ct-color-status-warning-border); }
+  .budget > .i { color: var(--ct-color-status-warning-fg); }
+  .budget .acts { display: flex; gap: var(--ct-space-100); margin-top: var(--ct-space-100); flex-wrap: wrap; }
+  .ctrl { display: grid; grid-template-columns: auto 1fr; gap: var(--ct-space-150); padding: var(--ct-space-200); border-radius: var(--ct-radius-lg); background: var(--ct-color-status-info-bg); border: 1px solid var(--ct-color-status-info-border); margin-top: var(--ct-space-150); }
+  .ctrl > .i { color: var(--ct-color-status-info-fg); }
+  .phone { border: 8px solid var(--ct-color-slate-900); border-radius: 28px; padding: var(--ct-space-100); background: var(--ct-color-surface-canvas); }
+  .phone .mission { padding: var(--ct-space-150); gap: var(--ct-space-100); }
+  .phone .mission h3 { font-size: var(--ct-font-size-100); }
+  .phone .why { font-size: var(--ct-font-size-087); }
+  .camp { display: grid; gap: var(--ct-space-075); padding: var(--ct-space-150) var(--ct-space-200); border-top: 1px solid var(--ct-color-border-subtle); }
+  .camp .t { display: flex; justify-content: space-between; gap: var(--ct-space-100); font: var(--ct-type-label); font-size: var(--ct-font-size-100); }
+  .camp .s { display: flex; justify-content: space-between; gap: var(--ct-space-100); font: var(--ct-type-body-sm); color: var(--ct-color-text-secondary); }
+  .fb .r { display: grid; grid-template-columns: 1fr auto; gap: var(--ct-space-100); align-items: center; padding: var(--ct-space-100) var(--ct-space-200); border-top: 1px solid var(--ct-color-border-subtle); font: var(--ct-type-body-sm); }
+  .fb .bar { grid-column: 1 / -1; height: 6px; }
+  .footer-acts { display: flex; justify-content: space-between; gap: var(--ct-space-100); padding-top: var(--ct-space-200); border-top: 1px solid var(--ct-color-border-subtle); flex-wrap: wrap; }
+  .slider { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+</style>
+</head>
+<body>
+<!--ICONS-->
+<div class="mk-stage">
+<div class="mk-frame">
+<div class="mk-example">Example data · Harbor &amp; Pine Market (fictional)</div>
+<div class="ct-app">
+<div class="shell">
+  <nav class="sidenav" aria-label="Main">
+    <div class="brand"><img src="../logo.svg" alt="ColsTorso"></div>
+    <a href="#"><svg class="i"><use href="#i-layout-dashboard"/></svg>Overview</a>
+    <a href="#" aria-current="page"><svg class="i"><use href="#i-megaphone"/></svg>Campaigns<span class="count">3</span></a>
+    <a href="#"><svg class="i"><use href="#i-target"/></svg>Mission rules</a>
+    <a href="#"><svg class="i"><use href="#i-list-checks"/></svg>Tasks &amp; storewalks</a>
+    <a href="#"><svg class="i"><use href="#i-message-square"/></svg>Store feedback<span class="count">38</span></a>
+    <a href="#"><svg class="i"><use href="#i-chart-line"/></svg>Impact</a>
+    <a href="#"><svg class="i"><use href="#i-lightbulb"/></svg>Best practices</a>
+    <div class="group">Admin</div>
+    <a href="#"><svg class="i"><use href="#i-database"/></svg>Data &amp; uploads</a>
+    <a href="#"><svg class="i"><use href="#i-users"/></svg>People &amp; stores</a>
+    <div class="foot"><a href="#"><svg class="i"><use href="#i-settings"/></svg>Settings</a></div>
+  </nav>
+  <div class="main">
+    <header class="topbar">
+      <img class="logo" src="../logo-mark.svg" alt="ColsTorso">
+      <div class="ctx"><b>HQ · All 50 stores</b><span>Robin Ashby · Store operations · Week 41</span></div>
+      <button class="iconbtn" aria-label="Search"><svg class="i"><use href="#i-search"/></svg></button>
+      <span class="avatar" role="img" aria-label="Robin Ashby">RA</span>
+    </header>
+    <div class="fresh" role="status">
+      <span class="src ok"><svg class="i i-sm"><use href="#i-circle-check"/></svg>All 6 data feeds current · last load 5:10 AM</span>
+      <span class="src aging"><svg class="i i-sm"><use href="#i-clock"/></svg>Labor: 2 stores late</span>
+    </div>
+    <main class="content">
+      <div class="pagehead"><div><h1 class="h1">Campaigns</h1><p class="lede">Point every store at what matters this season, without flooding them.</p></div>
+        <button class="btn btn-primary"><svg class="i"><use href="#i-plus"/></svg>New campaign</button></div>
+      <div class="kpis" data-note="1">
+        <div class="card kpi"><span class="k">Measured impact, network</span><span class="v num">+$182k<small style="font-size:var(--ct-font-size-100)">/wk</small></span><span class="d sec">Compared with stores not doing it</span></div>
+        <div class="card kpi"><span class="k">Missions accepted</span><span class="v num">71%</span><span class="d imp-pos"><svg class="i i-sm"><use href="#i-trending-up"/></svg>+4 pts in 4 weeks</span></div>
+        <div class="card kpi"><span class="k">Missions per store per day</span><span class="v num">2.6<small style="font-size:var(--ct-font-size-100)"> / 3 max</small></span><span class="d sec"><svg class="i i-sm"><use href="#i-shield-check"/></svg>Within the daily limit</span></div>
+        <div class="card kpi"><span class="k">Store feedback this week</span><span class="v num">38</span><span class="d imp-neg"><svg class="i i-sm"><use href="#i-message-square"/></svg>14 say "stock not delivered"</span></div>
+      </div>
+
+      <div class="hq">
+        <section class="card card-pad" aria-labelledby="cb-h">
+          <span class="eyebrow">New campaign · draft saved 2 min ago</span>
+          <h2 id="cb-h" class="h2" style="margin-top:4px">Holiday Baking Push</h2>
+          <ol class="stepper" aria-label="Campaign steps" data-note="2">
+            <li class="done"><span class="n"><svg class="i i-sm"><use href="#i-check"/></svg></span>Goal &amp; KPI</li>
+            <li aria-current="step"><span class="n">2</span>Stores</li>
+            <li><span class="n">3</span>Message &amp; tasks</li>
+            <li><span class="n">4</span>Review &amp; launch</li>
+          </ol>
+          <div class="bgrid">
+            <div>
+              <div class="fld" data-note="3">
+                <span class="lbl">Which stores?</span>
+                <div class="tokens">
+                  <span class="tok">Format: Standard, Superstore <svg class="i"><use href="#i-x"/></svg></span>
+                  <span class="tok">Has Bakery <svg class="i"><use href="#i-x"/></svg></span>
+                  <span class="tok ex">Except: stores in refit blackout <svg class="i"><use href="#i-x"/></svg></span>
+                  <button class="addtok">+ Add rule</button>
+                </div>
+                <div class="count"><b class="num">34</b><span>stores match · 4 regions · <a href="#">see list</a></span></div>
+              </div>
+              <div class="fld">
+                <span class="lbl">How hard should it push?</span>
+                <div class="seg" role="group" aria-label="Priority boost"><button aria-pressed="false">Gentle</button><button aria-pressed="true">Standard</button><button aria-pressed="false">Must-do</button></div>
+                <span class="hint">Standard: competes fairly with each store's own missions. Must-do skips the queue and should be rare.</span>
+              </div>
+              <div class="budget" role="status" data-note="4">
+                <svg class="i i-lg"><use href="#i-triangle-alert"/></svg>
+                <div><b>Mission budget check</b><br><span style="font:var(--ct-type-body-sm)">Adds about <b>0.5 missions per store per week</b>. 6 stores are already at their 3-a-day limit, so their lowest-value mission would move to the backlog.</span>
+                  <div class="acts"><button class="btn btn-secondary">See the 6 stores</button><button class="btn btn-ghost">Start them a week later</button></div></div>
+              </div>
+              <div class="ctrl" data-note="5">
+                <svg class="i i-lg"><use href="#i-shield-check"/></svg>
+                <div><b>How we'll measure it</b><br><span style="font:var(--ct-type-body-sm)">We'll hold back <b>8 similar stores</b> as a comparison group, picked at random. Results will be reported against them, so the season's natural lift isn't counted as campaign impact.</span></div>
+              </div>
+            </div>
+            <div data-note="6">
+              <span class="eyebrow">What a store manager will see</span>
+              <div class="phone" style="margin-top:var(--ct-space-100)">
+                <article class="card mission should">
+                  <div class="meta"><span class="chip p-should"><svg class="i"><use href="#i-arrow-up"/></svg>Should</span><span class="chip kind"><svg class="i"><use href="#i-megaphone"/></svg>HQ campaign</span></div>
+                  <h3>Bakery holiday range is selling below its space</h3>
+                  <div class="why"><span class="lbl">Why you're seeing this</span><span>Part of HQ's <b>Holiday Baking Push</b>. You're 14% below similar stores.</span></div>
+                  <div class="btn-row" style="grid-template-columns:1fr 1fr"><button class="btn btn-primary">Accept</button><button class="btn btn-secondary">Snooze</button></div>
+                </article>
+              </div>
+              <p class="muted" style="font:var(--ct-type-caption);margin-top:var(--ct-space-100)">The "why" is written per store using its own numbers.</p>
+            </div>
+          </div>
+          <div class="footer-acts"><button class="btn btn-secondary">Back</button><button class="btn btn-primary">Next: Message &amp; tasks<svg class="i"><use href="#i-arrow-right"/></svg></button></div>
+        </section>
+
+        <div style="display:grid;gap:var(--ct-space-200)">
+          <section class="card" aria-labelledby="ac-h">
+            <div class="card-pad" style="padding-bottom:var(--ct-space-100)"><h2 id="ac-h" class="h4">Running now</h2></div>
+            <div class="camp"><div class="t"><span>Fall Snack Push</span><span class="imp-pos num">+$12.4k/wk</span></div>
+              <div class="bar ok" role="progressbar" aria-label="Week 2 of 6" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"><span style="width:33%"></span></div>
+              <div class="s"><span>41 stores · 63% accepted</span><span>Week 2 of 6</span></div></div>
+            <div class="camp"><div class="t"><span>Hot Drinks Bar uptime</span><span class="imp-neu num">Too early</span></div>
+              <div class="bar" role="progressbar" aria-label="Week 1 of 4" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span style="width:25%"></span></div>
+              <div class="s"><span>50 stores · 88% accepted</span><span>Week 1 of 4</span></div></div>
+          </section>
+          <section class="card fb" aria-labelledby="fb-h" data-note="7">
+            <div class="card-pad" style="padding-bottom:var(--ct-space-100)"><h2 id="fb-h" class="h4">What stores are telling you</h2><p class="muted" style="font:var(--ct-type-body-sm)">Reasons given when a mission was turned down, this week</p></div>
+            <div class="r"><span>"Stock not delivered"</span><b class="num">14</b><div class="bar"><span style="width:100%;background:var(--ct-color-chart-4)"></span></div></div>
+            <div class="r"><span>"Fixture or display missing"</span><b class="num">9</b><div class="bar"><span style="width:64%;background:var(--ct-color-chart-4)"></span></div></div>
+            <div class="r"><span>"Already fixed"</span><b class="num">8</b><div class="bar"><span style="width:57%;background:var(--ct-color-chart-5)"></span></div></div>
+            <div class="r"><span>"Not enough staff hours"</span><b class="num">7</b><div class="bar"><span style="width:50%;background:var(--ct-color-chart-5)"></span></div></div>
+            <div class="card-pad" style="padding-top:var(--ct-space-150)"><button class="btn btn-secondary btn-block"><svg class="i"><use href="#i-send"/></svg>Send "stock" reasons to Supply</button></div>
+          </section>
+          <section class="ai desktop-only" aria-label="Ask ColsTorso">
+            <div class="hd"><svg class="i"><use href="#i-sparkles"/></svg>Ask ColsTorso</div>
+            <div class="msg">Last year's Bakery push did best in stores with afternoon markdowns (+$410/wk vs +$150/wk). Add that as the suggested plan?
+              <div class="cite"><span>Campaign #7 results</span><span>Best practice #112</span></div></div>
+            <div class="prompts"><button>Yes, add it</button><button>Show the data</button></div>
+          </section>
+        </div>
+      </div>
+    </main>
+    <nav class="tabbar" aria-label="Main">
+      <a href="#"><svg class="i i-lg"><use href="#i-layout-dashboard"/></svg>Overview</a>
+      <a href="#" aria-current="page"><svg class="i i-lg"><use href="#i-megaphone"/></svg>Campaigns</a>
+      <a href="#"><svg class="i i-lg"><use href="#i-message-square"/></svg>Feedback<span class="badge">38</span></a>
+      <a href="#"><svg class="i i-lg"><use href="#i-chart-line"/></svg>Impact</a>
+      <a href="#"><svg class="i i-lg"><use href="#i-sparkles"/></svg>Ask</a>
+    </nav>
+  </div>
+</div>
+</div>
+</div>
+<aside class="mk-notes" aria-label="Design annotations">
+  <h2>HQ · dashboard &amp; campaign builder</h2>
+  <p class="sub">HQ steers what stores focus on. The builder protects store attention and sets up honest measurement.</p>
+  <ol>
+    <li data-n="1"><span><b>Store workload is a headline number</b>Missions per store per day sits next to impact and acceptance, so HQ sees the cost of adding more work alongside the benefit.<small>Fixes: alert fatigue starting at HQ (P1)</small></span></li>
+    <li data-n="2"><span><b>Four short steps</b>Goal, stores, message, review. Drafts save automatically, and the current step is shown with a number and a label.<small>Fixes: campaigns that are hard to set up</small></span></li>
+    <li data-n="3"><span><b>Pick stores with readable rules</b>Each rule reads like a sentence and can be removed, with the matching store count updating live. Exclusions such as refits are rules too, not a manual list.<small>Fixes: campaigns sent to stores they don't fit (P1, P6)</small></span></li>
+    <li data-n="4"><span><b>Mission budget check</b>Before launch, HQ sees how many stores hit their daily limit and what would be pushed back, and can start them later instead.<small>Fixes: alert fatigue (P1)</small></span></li>
+    <li data-n="5"><span><b>Comparison group set at launch</b>Comparison stores are picked at random up front, so the reported lift means something.<small>Fixes: trust in impact numbers (P5)</small></span></li>
+    <li data-n="6"><span><b>Live store preview</b>HQ sees the exact card a manager will get, including the per-store "why", before anything is sent.<small>Fixes: unclear why, the gap between HQ and stores (P2, P6)</small></span></li>
+    <li data-n="7"><span><b>Store feedback comes back to HQ</b>Rejection reasons are counted and can be passed to the right team. Stores can see that their feedback lands somewhere.<small>Fixes: the gap between HQ and stores (P6)</small></span></li>
+  </ol>
+</aside>
+</div>
+<script src="mk.js"></script>
+</body>
+</html>
