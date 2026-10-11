@@ -1,0 +1,438 @@
+/* ==========================================================================
+   ColsTorso design tokens  ·  v1.0.0  ·  prefix: --ct-
+   STABLE API: the build depends on these names. Never rename or remove a
+   token; add new ones and deprecate old ones in TOKENS.md instead.
+   Light theme is the default (:root). Dark theme: <html data-theme="dark">.
+   Fonts are open source (SIL OFL) and self-hosted in ./fonts/.
+   ========================================================================== */
+
+@font-face {
+  font-family: "Manrope";
+  src: url("./fonts/Manrope-Variable.woff2") format("woff2");
+  font-weight: 200 800; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("./fonts/Inter-Variable.woff2") format("woff2");
+  font-weight: 100 900; font-style: normal; font-display: swap;
+}
+
+:root {
+  /* ---------- 1. Color primitives (do not use directly in components) ---------- */
+  /* Cobalt — brand */
+  --ct-color-cobalt-50:  #EEF1FF;
+  --ct-color-cobalt-100: #DDE3FF;
+  --ct-color-cobalt-200: #BCC7FF;
+  --ct-color-cobalt-300: #93A4FF;
+  --ct-color-cobalt-400: #6A7DF5;
+  --ct-color-cobalt-500: #4A5CE8;
+  --ct-color-cobalt-600: #3443D1;
+  --ct-color-cobalt-700: #2A35A8;
+  --ct-color-cobalt-800: #212A80;
+  --ct-color-cobalt-900: #181E5C;
+  --ct-color-cobalt-950: #0F1340;
+  /* Marigold — accent (highlights, never body text on white) */
+  --ct-color-marigold-50:  #FFF8E1;
+  --ct-color-marigold-100: #FFEDB3;
+  --ct-color-marigold-200: #FFDF7A;
+  --ct-color-marigold-300: #FFCF3D;
+  --ct-color-marigold-400: #F5BA0A;
+  --ct-color-marigold-500: #D99E00;
+  --ct-color-marigold-600: #A87700;
+  --ct-color-marigold-700: #7D5800;
+  --ct-color-marigold-800: #5C4100;
+  --ct-color-marigold-900: #3D2B00;
+  /* Slate — neutrals (cool) */
+  --ct-color-slate-0:   #FFFFFF;
+  --ct-color-slate-25:  #F8F9FB;
+  --ct-color-slate-50:  #F1F3F7;
+  --ct-color-slate-100: #E5E8EF;
+  --ct-color-slate-200: #D1D6E0;
+  --ct-color-slate-300: #B2B9C7;
+  --ct-color-slate-400: #8B93A4;
+  --ct-color-slate-500: #616A7F;
+  --ct-color-slate-600: #4C5466;
+  --ct-color-slate-700: #363C4B;
+  --ct-color-slate-800: #242834;
+  --ct-color-slate-900: #171A23;
+  --ct-color-slate-950: #0E1016;
+  /* Green — success / positive impact */
+  --ct-color-green-50:  #E8F7EE;
+  --ct-color-green-100: #C9EDD7;
+  --ct-color-green-300: #6FCF97;
+  --ct-color-green-500: #23A35A;
+  --ct-color-green-600: #18803F;
+  --ct-color-green-700: #126632;
+  --ct-color-green-900: #0A3A1D;
+  /* Amber — warning / stale data */
+  --ct-color-amber-50:  #FFF4E0;
+  --ct-color-amber-100: #FFE3B0;
+  --ct-color-amber-300: #FFB547;
+  --ct-color-amber-500: #E07B00;
+  --ct-color-amber-600: #B05F00;
+  --ct-color-amber-700: #8A4A00;
+  --ct-color-amber-900: #472600;
+  /* Red — danger / negative impact */
+  --ct-color-red-50:  #FDECEC;
+  --ct-color-red-100: #F9D0D1;
+  --ct-color-red-300: #F08A8D;
+  --ct-color-red-500: #DE3A40;
+  --ct-color-red-600: #C2262C;
+  --ct-color-red-700: #9C1C21;
+  --ct-color-red-900: #520D10;
+  /* Sky — info */
+  --ct-color-sky-50:  #E6F4FB;
+  --ct-color-sky-100: #C2E4F5;
+  --ct-color-sky-300: #6CC0E8;
+  --ct-color-sky-500: #1890C9;
+  --ct-color-sky-600: #0B6F9E;
+  --ct-color-sky-700: #08587E;
+  --ct-color-sky-900: #032C40;
+  /* Flame — "Must" mission priority (distinct from danger red) */
+  --ct-color-flame-50:  #FFEFE6;
+  --ct-color-flame-100: #FFD9C4;
+  --ct-color-flame-300: #FF9A66;
+  --ct-color-flame-500: #E8590C;
+  --ct-color-flame-600: #C2440A;
+  --ct-color-flame-700: #9A3408;
+  --ct-color-flame-900: #4D1A04;
+
+  /* ---------- 2. Semantic color: surface ---------- */
+  --ct-color-surface-canvas:        var(--ct-color-slate-25);
+  --ct-color-surface-raised:        var(--ct-color-slate-0);
+  --ct-color-surface-sunken:        var(--ct-color-slate-50);
+  --ct-color-surface-hover:         var(--ct-color-slate-50);
+  --ct-color-surface-selected:      var(--ct-color-cobalt-50);
+  --ct-color-surface-overlay:       var(--ct-color-slate-0);
+  --ct-color-surface-scrim:         rgb(14 16 22 / 0.56);
+  --ct-color-surface-inverse:       var(--ct-color-slate-900);
+  --ct-color-surface-brand:         var(--ct-color-cobalt-600);
+  --ct-color-surface-brand-subtle:  var(--ct-color-cobalt-50);
+  --ct-color-surface-accent-subtle: var(--ct-color-marigold-50);
+  --ct-color-surface-nav:           var(--ct-color-slate-0);
+
+  /* ---------- 3. Semantic color: text ---------- */
+  --ct-color-text-primary:   var(--ct-color-slate-900);
+  --ct-color-text-secondary: var(--ct-color-slate-600);
+  --ct-color-text-muted:     var(--ct-color-slate-500);  /* ≥4.5:1 on raised + canvas */
+  --ct-color-text-disabled:  var(--ct-color-slate-400);  /* exempt from contrast; never sole carrier of info */
+  --ct-color-text-inverse:   var(--ct-color-slate-0);
+  --ct-color-text-on-brand:  var(--ct-color-slate-0);
+  --ct-color-text-on-accent: var(--ct-color-slate-950);
+  --ct-color-text-brand:     var(--ct-color-cobalt-600);
+  --ct-color-text-link:      var(--ct-color-cobalt-600);
+  --ct-color-text-link-hover:var(--ct-color-cobalt-800);
+
+  /* ---------- 4. Semantic color: border ---------- */
+  --ct-color-border-subtle:  var(--ct-color-slate-100);
+  --ct-color-border-default: var(--ct-color-slate-200);
+  --ct-color-border-strong:  var(--ct-color-slate-500);  /* ≥3:1 — use for inputs & meaningful UI boundaries */
+  --ct-color-border-brand:   var(--ct-color-cobalt-600);
+  --ct-color-border-focus:   var(--ct-color-cobalt-600);
+
+  /* ---------- 5. Semantic color: brand / interactive ---------- */
+  --ct-color-brand-primary:         var(--ct-color-cobalt-600);
+  --ct-color-brand-primary-hover:   var(--ct-color-cobalt-700);
+  --ct-color-brand-primary-active:  var(--ct-color-cobalt-800);
+  --ct-color-brand-primary-subtle:  var(--ct-color-cobalt-50);
+  --ct-color-brand-accent:          var(--ct-color-marigold-400);
+  --ct-color-brand-accent-subtle:   var(--ct-color-marigold-50);
+  --ct-color-brand-ink:             var(--ct-color-cobalt-950);
+
+  /* ---------- 6. Semantic color: status (fg = text/icon on bg; solid = fills with white text) ---------- */
+  --ct-color-status-success-fg:     var(--ct-color-green-700);
+  --ct-color-status-success-bg:     var(--ct-color-green-50);
+  --ct-color-status-success-border: var(--ct-color-green-600);
+  --ct-color-status-success-solid:  var(--ct-color-green-600);
+  --ct-color-status-warning-fg:     var(--ct-color-amber-700);
+  --ct-color-status-warning-bg:     var(--ct-color-amber-50);
+  --ct-color-status-warning-border: var(--ct-color-amber-600);
+  --ct-color-status-warning-solid:  var(--ct-color-amber-600);
+  --ct-color-status-danger-fg:      var(--ct-color-red-700);
+  --ct-color-status-danger-bg:      var(--ct-color-red-50);
+  --ct-color-status-danger-border:  var(--ct-color-red-600);
+  --ct-color-status-danger-solid:   var(--ct-color-red-600);
+  --ct-color-status-info-fg:        var(--ct-color-sky-700);
+  --ct-color-status-info-bg:        var(--ct-color-sky-50);
+  --ct-color-status-info-border:    var(--ct-color-sky-600);
+  --ct-color-status-info-solid:     var(--ct-color-sky-600);
+
+  /* ---------- 7. Mission priority (always paired with label + icon) ---------- */
+  --ct-color-priority-must-fg:       var(--ct-color-flame-700);
+  --ct-color-priority-must-bg:       var(--ct-color-flame-50);
+  --ct-color-priority-must-border:   var(--ct-color-flame-600);
+  --ct-color-priority-should-fg:     var(--ct-color-cobalt-700);
+  --ct-color-priority-should-bg:     var(--ct-color-cobalt-50);
+  --ct-color-priority-should-border: var(--ct-color-cobalt-500);
+  --ct-color-priority-could-fg:      var(--ct-color-slate-600);
+  --ct-color-priority-could-bg:      var(--ct-color-slate-50);
+  --ct-color-priority-could-border:  var(--ct-color-slate-400);
+
+  /* ---------- 8. Impact (always paired with +/− sign and arrow icon) ---------- */
+  --ct-color-impact-positive-fg: var(--ct-color-green-700);
+  --ct-color-impact-positive-bg: var(--ct-color-green-50);
+  --ct-color-impact-negative-fg: var(--ct-color-red-700);
+  --ct-color-impact-negative-bg: var(--ct-color-red-50);
+  --ct-color-impact-neutral-fg:  var(--ct-color-slate-600);
+  --ct-color-impact-neutral-bg:  var(--ct-color-slate-50);
+  --ct-color-impact-store-line:  var(--ct-color-cobalt-600);   /* "your store" series */
+  --ct-color-impact-control-line:var(--ct-color-slate-500);    /* control/peer group series (dashed) */
+  --ct-color-impact-band:        rgb(52 67 209 / 0.12);        /* confidence band fill */
+
+  /* ---------- 9. Data freshness ---------- */
+  --ct-color-freshness-fresh-fg: var(--ct-color-green-700);
+  --ct-color-freshness-aging-fg: var(--ct-color-amber-700);
+  --ct-color-freshness-stale-fg: var(--ct-color-red-700);
+  --ct-color-freshness-offline-bg: var(--ct-color-slate-800);
+  --ct-color-freshness-offline-fg: var(--ct-color-slate-0);
+
+  /* ---------- 10. Categorical chart palette (CVD-tested order; still label every series) ---------- */
+  --ct-color-chart-1: var(--ct-color-cobalt-600);
+  --ct-color-chart-2: var(--ct-color-marigold-600);
+  --ct-color-chart-3: var(--ct-color-sky-500);
+  --ct-color-chart-4: var(--ct-color-flame-600);
+  --ct-color-chart-5: var(--ct-color-slate-500);
+  --ct-color-chart-6: var(--ct-color-green-600);
+
+  /* ---------- 11. Typography ---------- */
+  --ct-font-family-display: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --ct-font-family-body:    "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --ct-font-family-mono:    ui-monospace, "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+
+  --ct-font-size-075: 0.75rem;   /* 12px — legal/metadata only, never on store mobile primary content */
+  --ct-font-size-087: 0.875rem;  /* 14px */
+  --ct-font-size-100: 1rem;      /* 16px — BASE */
+  --ct-font-size-112: 1.125rem;  /* 18px */
+  --ct-font-size-125: 1.25rem;   /* 20px */
+  --ct-font-size-150: 1.5rem;    /* 24px */
+  --ct-font-size-187: 1.875rem;  /* 30px */
+  --ct-font-size-225: 2.25rem;   /* 36px */
+  --ct-font-size-300: 3rem;      /* 48px */
+
+  --ct-font-weight-regular:   400;
+  --ct-font-weight-medium:    500;
+  --ct-font-weight-semibold:  600;
+  --ct-font-weight-bold:      700;
+  --ct-font-weight-extrabold: 800;
+
+  --ct-line-height-tight:  1.15;
+  --ct-line-height-snug:   1.3;
+  --ct-line-height-normal: 1.5;
+
+  --ct-letter-spacing-tight:  -0.015em;
+  --ct-letter-spacing-normal: 0;
+  --ct-letter-spacing-wide:   0.04em;
+
+  /* Composite text styles — use with `font: var(--ct-type-h1);` */
+  --ct-type-display:  var(--ct-font-weight-extrabold) var(--ct-font-size-300)/var(--ct-line-height-tight) var(--ct-font-family-display);
+  --ct-type-h1:       var(--ct-font-weight-extrabold) var(--ct-font-size-187)/var(--ct-line-height-tight) var(--ct-font-family-display);
+  --ct-type-h2:       var(--ct-font-weight-bold) var(--ct-font-size-150)/var(--ct-line-height-snug) var(--ct-font-family-display);
+  --ct-type-h3:       var(--ct-font-weight-bold) var(--ct-font-size-125)/var(--ct-line-height-snug) var(--ct-font-family-display);
+  --ct-type-h4:       var(--ct-font-weight-semibold) var(--ct-font-size-112)/var(--ct-line-height-snug) var(--ct-font-family-body);
+  --ct-type-body-lg:  var(--ct-font-weight-regular) var(--ct-font-size-112)/var(--ct-line-height-normal) var(--ct-font-family-body);
+  --ct-type-body:     var(--ct-font-weight-regular) var(--ct-font-size-100)/var(--ct-line-height-normal) var(--ct-font-family-body);
+  --ct-type-body-sm:  var(--ct-font-weight-regular) var(--ct-font-size-087)/var(--ct-line-height-normal) var(--ct-font-family-body);
+  --ct-type-label:    var(--ct-font-weight-semibold) var(--ct-font-size-087)/var(--ct-line-height-snug) var(--ct-font-family-body);
+  --ct-type-caption:  var(--ct-font-weight-medium) var(--ct-font-size-075)/var(--ct-line-height-snug) var(--ct-font-family-body);
+  --ct-type-metric:   var(--ct-font-weight-extrabold) var(--ct-font-size-225)/var(--ct-line-height-tight) var(--ct-font-family-display);
+  --ct-type-metric-sm:var(--ct-font-weight-bold) var(--ct-font-size-150)/var(--ct-line-height-tight) var(--ct-font-family-display);
+
+  /* ---------- 12. Spacing (4px grid) ---------- */
+  --ct-space-0:    0;
+  --ct-space-025:  0.125rem; /* 2 */
+  --ct-space-050:  0.25rem;  /* 4 */
+  --ct-space-075:  0.375rem; /* 6 */
+  --ct-space-100:  0.5rem;   /* 8 */
+  --ct-space-150:  0.75rem;  /* 12 */
+  --ct-space-200:  1rem;     /* 16 */
+  --ct-space-250:  1.25rem;  /* 20 */
+  --ct-space-300:  1.5rem;   /* 24 */
+  --ct-space-400:  2rem;     /* 32 */
+  --ct-space-500:  2.5rem;   /* 40 */
+  --ct-space-600:  3rem;     /* 48 */
+  --ct-space-800:  4rem;     /* 64 */
+
+  /* ---------- 13. Radius ---------- */
+  --ct-radius-none: 0;
+  --ct-radius-sm:   0.25rem;  /* 4  — chips, tags */
+  --ct-radius-md:   0.5rem;   /* 8  — inputs, buttons */
+  --ct-radius-lg:   0.75rem;  /* 12 — cards */
+  --ct-radius-xl:   1rem;     /* 16 — sheets, panels */
+  --ct-radius-2xl:  1.5rem;   /* 24 — bottom sheet top corners */
+  --ct-radius-pill: 999px;
+  --ct-radius-circle: 50%;
+
+  /* ---------- 14. Elevation ---------- */
+  --ct-shadow-none: none;
+  --ct-shadow-sm:   0 1px 2px rgb(23 26 35 / 0.06), 0 1px 1px rgb(23 26 35 / 0.04);
+  --ct-shadow-md:   0 4px 12px rgb(23 26 35 / 0.08), 0 1px 3px rgb(23 26 35 / 0.06);
+  --ct-shadow-lg:   0 12px 32px rgb(23 26 35 / 0.12), 0 2px 6px rgb(23 26 35 / 0.06);
+  --ct-shadow-overlay: 0 24px 64px rgb(23 26 35 / 0.24);
+  --ct-shadow-nav:  0 -1px 0 var(--ct-color-border-default), 0 -6px 16px rgb(23 26 35 / 0.06);
+
+  /* ---------- 15. Focus ---------- */
+  --ct-focus-ring-width:  3px;
+  --ct-focus-ring-offset: 2px;
+  --ct-focus-ring-color:  var(--ct-color-cobalt-600);
+  --ct-focus-ring:        0 0 0 var(--ct-focus-ring-offset) var(--ct-color-surface-raised), 0 0 0 calc(var(--ct-focus-ring-offset) + var(--ct-focus-ring-width)) var(--ct-focus-ring-color);
+
+  /* ---------- 16. Sizing ---------- */
+  --ct-size-touch-target:        44px;  /* WCAG 2.5.5/2.5.8 minimum for store screens */
+  --ct-size-touch-target-lg:     56px;  /* primary one-thumb actions (Accept, Done) */
+  --ct-size-icon-sm:   16px;
+  --ct-size-icon-md:   20px;
+  --ct-size-icon-lg:   24px;
+  --ct-size-icon-xl:   32px;
+  --ct-size-nav-bottom-height: 64px;
+  --ct-size-nav-side-width:    248px;
+  --ct-size-nav-side-collapsed: 72px;
+  --ct-size-topbar-height:     56px;
+  --ct-size-content-max:       1200px;
+  --ct-size-reading-max:       68ch;
+  --ct-size-ai-panel-width:    400px;
+
+  /* ---------- 17. Motion ---------- */
+  --ct-motion-duration-instant: 80ms;
+  --ct-motion-duration-fast:    150ms;
+  --ct-motion-duration-base:    220ms;
+  --ct-motion-duration-slow:    320ms;
+  --ct-motion-easing-standard:  cubic-bezier(0.2, 0, 0, 1);
+  --ct-motion-easing-enter:     cubic-bezier(0, 0, 0, 1);
+  --ct-motion-easing-exit:      cubic-bezier(0.3, 0, 1, 1);
+
+  /* ---------- 18. Z-index ---------- */
+  --ct-z-base:     0;
+  --ct-z-raised:   10;
+  --ct-z-sticky:   100;
+  --ct-z-nav:      200;
+  --ct-z-dropdown: 300;
+  --ct-z-overlay:  400;
+  --ct-z-modal:    500;
+  --ct-z-toast:    600;
+  --ct-z-tooltip:  700;
+
+  /* ---------- 19. Breakpoints (min-width, mobile-first). CSS vars can't be used inside
+     @media; these exist for JS (getComputedStyle) and documentation. Use the literal
+     values in media/container queries: 480 / 768 / 1024 / 1280 / 1440. ---------- */
+  --ct-breakpoint-sm:  480px;
+  --ct-breakpoint-md:  768px;
+  --ct-breakpoint-lg:  1024px;
+  --ct-breakpoint-xl:  1280px;
+  --ct-breakpoint-2xl: 1440px;
+
+  /* ---------- 20. Opacity ---------- */
+  --ct-opacity-disabled: 0.5;
+  --ct-opacity-skeleton: 1;
+
+  color-scheme: light;
+}
+
+/* ============================== Dark theme ============================== */
+[data-theme="dark"] {
+  --ct-color-surface-canvas:        var(--ct-color-slate-950);
+  --ct-color-surface-raised:        var(--ct-color-slate-900);
+  --ct-color-surface-sunken:        #12141C;
+  --ct-color-surface-hover:         var(--ct-color-slate-800);
+  --ct-color-surface-selected:      #1C2250;
+  --ct-color-surface-overlay:       var(--ct-color-slate-800);
+  --ct-color-surface-scrim:         rgb(0 0 0 / 0.64);
+  --ct-color-surface-inverse:       var(--ct-color-slate-50);
+  --ct-color-surface-brand:         var(--ct-color-cobalt-400);
+  --ct-color-surface-brand-subtle:  #1A1F4A;
+  --ct-color-surface-accent-subtle: #2E2306;
+  --ct-color-surface-nav:           var(--ct-color-slate-900);
+
+  --ct-color-text-primary:   var(--ct-color-slate-50);
+  --ct-color-text-secondary: var(--ct-color-slate-300);
+  --ct-color-text-muted:     var(--ct-color-slate-400);
+  --ct-color-text-disabled:  var(--ct-color-slate-600);
+  --ct-color-text-inverse:   var(--ct-color-slate-900);
+  --ct-color-text-on-brand:  var(--ct-color-slate-950);
+  --ct-color-text-on-accent: var(--ct-color-slate-950);
+  --ct-color-text-brand:     var(--ct-color-cobalt-300);
+  --ct-color-text-link:      var(--ct-color-cobalt-300);
+  --ct-color-text-link-hover:var(--ct-color-cobalt-200);
+
+  --ct-color-border-subtle:  var(--ct-color-slate-800);
+  --ct-color-border-default: var(--ct-color-slate-700);
+  --ct-color-border-strong:  var(--ct-color-slate-500);
+  --ct-color-border-brand:   var(--ct-color-cobalt-300);
+  --ct-color-border-focus:   var(--ct-color-cobalt-300);
+
+  --ct-color-brand-primary:         var(--ct-color-cobalt-300);
+  --ct-color-brand-primary-hover:   var(--ct-color-cobalt-200);
+  --ct-color-brand-primary-active:  var(--ct-color-cobalt-100);
+  --ct-color-brand-primary-subtle:  #1A1F4A;
+  --ct-color-brand-accent:          var(--ct-color-marigold-300);
+  --ct-color-brand-accent-subtle:   #2E2306;
+  --ct-color-brand-ink:             var(--ct-color-cobalt-50);
+
+  --ct-color-status-success-fg:     var(--ct-color-green-300);
+  --ct-color-status-success-bg:     #0E2A18;
+  --ct-color-status-success-border: var(--ct-color-green-500);
+  --ct-color-status-success-solid:  var(--ct-color-green-300);
+  --ct-color-status-warning-fg:     var(--ct-color-amber-300);
+  --ct-color-status-warning-bg:     #33200A;
+  --ct-color-status-warning-border: var(--ct-color-amber-500);
+  --ct-color-status-warning-solid:  var(--ct-color-amber-300);
+  --ct-color-status-danger-fg:      var(--ct-color-red-300);
+  --ct-color-status-danger-bg:      #3A1214;
+  --ct-color-status-danger-border:  var(--ct-color-red-500);
+  --ct-color-status-danger-solid:   var(--ct-color-red-300);
+  --ct-color-status-info-fg:        var(--ct-color-sky-300);
+  --ct-color-status-info-bg:        #0A2533;
+  --ct-color-status-info-border:    var(--ct-color-sky-500);
+  --ct-color-status-info-solid:     var(--ct-color-sky-300);
+
+  --ct-color-priority-must-fg:       var(--ct-color-flame-300);
+  --ct-color-priority-must-bg:       #3A1A0A;
+  --ct-color-priority-must-border:   var(--ct-color-flame-500);
+  --ct-color-priority-should-fg:     var(--ct-color-cobalt-200);
+  --ct-color-priority-should-bg:     #1A1F4A;
+  --ct-color-priority-should-border: var(--ct-color-cobalt-400);
+  --ct-color-priority-could-fg:      var(--ct-color-slate-300);
+  --ct-color-priority-could-bg:      var(--ct-color-slate-800);
+  --ct-color-priority-could-border:  var(--ct-color-slate-500);
+
+  --ct-color-impact-positive-fg: var(--ct-color-green-300);
+  --ct-color-impact-positive-bg: #0E2A18;
+  --ct-color-impact-negative-fg: var(--ct-color-red-300);
+  --ct-color-impact-negative-bg: #3A1214;
+  --ct-color-impact-neutral-fg:  var(--ct-color-slate-300);
+  --ct-color-impact-neutral-bg:  var(--ct-color-slate-800);
+  --ct-color-impact-store-line:  var(--ct-color-cobalt-300);
+  --ct-color-impact-control-line:var(--ct-color-slate-400);
+  --ct-color-impact-band:        rgb(147 164 255 / 0.16);
+
+  --ct-color-freshness-fresh-fg: var(--ct-color-green-300);
+  --ct-color-freshness-aging-fg: var(--ct-color-amber-300);
+  --ct-color-freshness-stale-fg: var(--ct-color-red-300);
+  --ct-color-freshness-offline-bg: var(--ct-color-slate-100);
+  --ct-color-freshness-offline-fg: var(--ct-color-slate-950);
+
+  --ct-color-chart-1: var(--ct-color-cobalt-300);
+  --ct-color-chart-2: var(--ct-color-marigold-300);
+  --ct-color-chart-3: var(--ct-color-sky-300);
+  --ct-color-chart-4: var(--ct-color-flame-300);
+  --ct-color-chart-5: var(--ct-color-slate-400);
+  --ct-color-chart-6: var(--ct-color-green-300);
+
+  --ct-shadow-sm:   0 1px 2px rgb(0 0 0 / 0.4);
+  --ct-shadow-md:   0 4px 12px rgb(0 0 0 / 0.45);
+  --ct-shadow-lg:   0 12px 32px rgb(0 0 0 / 0.5);
+  --ct-shadow-overlay: 0 24px 64px rgb(0 0 0 / 0.6);
+  --ct-shadow-nav:  0 -1px 0 var(--ct-color-border-default);
+  --ct-focus-ring-color: var(--ct-color-cobalt-300);
+
+  color-scheme: dark;
+}
+
+/* Reduced motion: collapse durations (components must not rely on animation to convey state) */
+@media (prefers-reduced-motion: reduce) {
+  :root, [data-theme="dark"] {
+    --ct-motion-duration-instant: 0ms;
+    --ct-motion-duration-fast:    0ms;
+    --ct-motion-duration-base:    0ms;
+    --ct-motion-duration-slow:    0ms;
+  }
+}
